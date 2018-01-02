@@ -10,7 +10,7 @@ public class Zlecenie {
     private int iD;
     public int iloscZlec;
     public Date dataZlec;
-    public StatusZlecenia statusZlecenia;
+//    public StatusZlecenia statusZlecenia;
     private String uwagi;
     public Zapotrzebowanie zapotrzebowanie;
     public Logistyk zlecający;

@@ -17,13 +17,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/lista_dostawcow_btn"
+        android:id="@+id/zapotrzebowan_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lista dostawców"
+        android:text="Wyświetl zapotrzebowanie"
         app:layout_constraintStart_toStartOf="@+id/gen_plan_dostaw_btn"
-        app:layout_constraintTop_toBottomOf="@+id/gen_plan_dostaw_btn"
-        tools:text="Lista dostawców" />
+        app:layout_constraintTop_toBottomOf="@+id/gen_plan_dostaw_btn" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
