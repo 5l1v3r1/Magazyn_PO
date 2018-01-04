@@ -9,32 +9,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class Zapotrzebowanie {
 
-    @SerializedName("DataPrzetworzenia")
-    @Expose
-    private Object dataPrzetworzenia;
     @SerializedName("DataZap")
     @Expose
     private String dataZap;
-    @SerializedName("ID")
+    @SerializedName("IDZapotrzebowania")
     @Expose
-    private Integer id;
+    private Integer idZapotrzebowania;
     @SerializedName("IloscBrak")
     @Expose
     private Integer iloscBrak;
-    @SerializedName("PracownikID")
+    @SerializedName("LogistykNrLogistyka")
     @Expose
-    private Integer pracownikID;
+    private String logistykNrLogistyka;
+    @SerializedName("Towar")
+    @Expose
+    private Towar towar;
     @SerializedName("TowarID")
     @Expose
-    private Integer towarID;
-
-    public Object getDataPrzetworzenia() {
-        return dataPrzetworzenia;
-    }
-
-    public void setDataPrzetworzenia(Object dataPrzetworzenia) {
-        this.dataPrzetworzenia = dataPrzetworzenia;
-    }
+    private Integer towarId;
 
     public String getDataZap() {
         return dataZap;
@@ -44,12 +36,12 @@ public class Zapotrzebowanie {
         this.dataZap = dataZap;
     }
 
-    public Integer getID() {
-        return id;
+    public Integer getIDZapotrzebowania() {
+        return idZapotrzebowania;
     }
 
-    public void setID(Integer iD) {
-        this.id = iD;
+    public void setIDZapotrzebowania(Integer idZapotrzebowania) {
+        this.idZapotrzebowania = idZapotrzebowania;
     }
 
     public Integer getIloscBrak() {
@@ -60,20 +52,28 @@ public class Zapotrzebowanie {
         this.iloscBrak = iloscBrak;
     }
 
-    public Integer getPracownikID() {
-        return pracownikID;
+    public String getLogistykNrLogistyka() {
+        return logistykNrLogistyka;
     }
 
-    public void setPracownikID(Integer pracownikID) {
-        this.pracownikID = pracownikID;
+    public void setLogistykNrLogistyka(String logistykNrLogistyka) {
+        this.logistykNrLogistyka = logistykNrLogistyka;
     }
 
-    public Integer getTowarID() {
-        return towarID;
+    public Towar getTowar() {
+        return towar;
     }
 
-    public void setTowarID(Integer towarID) {
-        this.towarID = towarID;
+    public void setTowar(Towar towar) {
+        this.towar = towar;
+    }
+
+    public Integer getTowarId() {
+        return towarId;
+    }
+
+    public void setTowarId(Integer towarId) {
+        this.towarId = towarId;
     }
 
 }
