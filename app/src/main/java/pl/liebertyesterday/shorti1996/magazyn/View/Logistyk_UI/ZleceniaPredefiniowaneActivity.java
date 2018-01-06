@@ -4,21 +4,29 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
+import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
 import pl.liebertyesterday.shorti1996.magazyn.Model.PotrzebnyTowar;
+import pl.liebertyesterday.shorti1996.magazyn.Model.WeAreAgile;
+import pl.liebertyesterday.shorti1996.magazyn.Model.Zlecenie;
 import pl.liebertyesterday.shorti1996.magazyn.R;
 
 // TODO dodac (un)check all
@@ -26,12 +34,18 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
 
     public static final String TAG = ZleceniaPredefiniowaneActivity.class.getSimpleName();
 
+    private Dostawca mDostawca;
     private List<PotrzebnyTowar> mPotrzebneTowary;
 
     @BindView(R.id.predef_zlec_rv)
     RecyclerView mZleceniaRv;
     @BindView(R.id.predef_zlec_wait)
     TextView mWaitInfo;
+    @BindView(R.id.predef_zlec_anuluj)
+    Button mAnulujBtn;
+    @BindView(R.id.predef_zlec_gotowe)
+    Button mGotoweBtn;
+    private PredefZlecAdapter mPredefZlecAdapter;
 
 
     @Override
@@ -41,17 +55,58 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        String potrzebneTowaryJson = getIntent().getStringExtra(ZleceniaDostawcyActivity.extra_potrzebne_towary);
+        mAnulujBtn.setOnClickListener(view -> ZleceniaPredefiniowaneActivity.this.finish());
+        mGotoweBtn.setOnClickListener(view -> utworzZlecenia());
+        String dostawcaJson = getIntent().getStringExtra(ZleceniaDostawcyActivity.EXTRA_WYBRANY_DOSTAWCA);
         Gson gson = new Gson();
-        PotrzebnyTowar[] potrzebneTowary = gson.fromJson(potrzebneTowaryJson, PotrzebnyTowar[].class);
-        mPotrzebneTowary = new LinkedList(Arrays.asList(potrzebneTowary));
+//        PotrzebnyTowar[] potrzebneTowary = gson.fromJson(potrzebneTowaryJson, PotrzebnyTowar[].class);
+        mDostawca = gson.fromJson(dostawcaJson, Dostawca.class);
+        mPotrzebneTowary = mDostawca.getPotrzebneTowary();
         setupRecyclerView();
+    }
+
+    private void utworzZlecenia() {
+        List<Zlecenie> zlecenia = new LinkedList<>();
+        for (PotrzebnyTowar pt : mPredefZlecAdapter.mPotrzebneTowary) {
+            if (pt.isCzyZamowic()) {
+                Zlecenie zlecenie = new Zlecenie();
+                zlecenie.setIloscZlec(pt.getDoZamowienia());
+                zlecenie.setZapotrzebowanieId(pt.getIdZapotrzebowania());
+                zlecenie.setLogistykNrLogistyka(WeAreAgile.NUMER_LOGISTYKA);
+                zlecenie.setNrDostawcy(mDostawca.getNrDostawcy());
+                zlecenia.add(zlecenie);
+            }
+        }
+//        zlecenia.toArray();
+//        Gson gson = new Gson();
+//        String JsonToSend = gson.toJson(zlecenia.toArray(), Zlecenie[].class);
+        NetworkCaller caller = new NetworkCaller();
+        MagazynApi serviceApi = caller.getService();
+        serviceApi.putUtworzDostawe(zlecenia)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(responseBody -> {
+                    Log.d(TAG, "utworzZlecenia: " + responseBody.string());
+                });
+//        serviceApi.getDostawcy()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .doOnComplete(this::setupRecyclerView)
+//                .subscribe(dostawcy -> {
+//                    for (Dostawca d : dostawcy) {
+//                        Log.d(TAG, String.format("onCreate: dostawca id %s", d.getNrDostawcy()));
+//                        mDostawcy.add(d);
+//                    }
+//                }, throwable -> {
+//                    Log.d(TAG, "onCreate: network error");
+//                });
     }
 
     private void setupRecyclerView() {
         hideWaitInfo();
         mZleceniaRv.setLayoutManager(new LinearLayoutManager(this));
-        mZleceniaRv.setAdapter(new PredefZlecAdapter(mPotrzebneTowary));
+        mPredefZlecAdapter = new PredefZlecAdapter(mPotrzebneTowary);
+        mZleceniaRv.setAdapter(mPredefZlecAdapter);
     }
 
     private void hideWaitInfo() {
@@ -59,7 +114,7 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
     }
 
     class PredefZlecAdapter extends RecyclerView.Adapter<PredefZlecAdapter.PotrzebnyTowarViewHolder> {
-        private List<PotrzebnyTowar> mPotrzebneTowary;
+        List<PotrzebnyTowar> mPotrzebneTowary;
 
         public PredefZlecAdapter(List<PotrzebnyTowar> potrzebneTowary) {
             mPotrzebneTowary = potrzebneTowary;
@@ -95,6 +150,9 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
                 super(view);
                 ButterKnife.bind(this, view);
                 view.setOnClickListener(this);
+                mCzyZam.setOnCheckedChangeListener((compoundButton, b) -> {
+                    mPotrzebneTowary.get(getAdapterPosition()).setCzyZamowic(b);
+                });
             }
 
             @Override

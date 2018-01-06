@@ -1,18 +1,67 @@
 package pl.liebertyesterday.shorti1996.magazyn.Model;
 
-import java.util.Date;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by wojciech.liebert on 01.01.2018.
  */
 
 public class Zlecenie {
-    private int iD;
-    public int iloscZlec;
-    public Date dataZlec;
-//    public StatusZlecenia statusZlecenia;
-    private String uwagi;
-    public Zapotrzebowanie zapotrzebowanie;
-    public Logistyk zlecający;
-    public Dostawa dostawaZlecona;
+
+    @SerializedName("IloscZlec")
+    @Expose
+    private int iloscZlec;
+    @SerializedName("DostawaID")
+    @Expose
+    private int dostawaId;
+    @SerializedName("ZapotrzebowanieID")
+    @Expose
+    private int zapotrzebowanieId;
+    @SerializedName("LogistykNrLogistyka")
+    @Expose
+    private int logistykNrLogistyka;
+    @SerializedName("NrDostawcy")
+    @Expose
+    private int nrDostawcy;
+
+    public int getIloscZlec() {
+        return iloscZlec;
+    }
+
+    public void setIloscZlec(int iloscZlec) {
+        this.iloscZlec = iloscZlec;
+    }
+
+    public int getDostawaId() {
+        return dostawaId;
+    }
+
+    public void setDostawaId(int dostawaId) {
+        this.dostawaId = dostawaId;
+    }
+
+    public int getZapotrzebowanieId() {
+        return zapotrzebowanieId;
+    }
+
+    public void setZapotrzebowanieId(int zapotrzebowanieId) {
+        this.zapotrzebowanieId = zapotrzebowanieId;
+    }
+
+    public int getLogistykNrLogistyka() {
+        return logistykNrLogistyka;
+    }
+
+    public void setLogistykNrLogistyka(int logistykNrLogistyka) {
+        this.logistykNrLogistyka = logistykNrLogistyka;
+    }
+
+    public int getNrDostawcy() {
+        return nrDostawcy;
+    }
+
+    public void setNrDostawcy(int nrDostawcy) {
+        this.nrDostawcy = nrDostawcy;
+    }
 }

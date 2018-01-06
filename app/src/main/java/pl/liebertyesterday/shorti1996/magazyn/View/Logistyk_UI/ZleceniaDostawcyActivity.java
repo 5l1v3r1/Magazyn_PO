@@ -23,14 +23,13 @@ import io.reactivex.schedulers.Schedulers;
 import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
 import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
-import pl.liebertyesterday.shorti1996.magazyn.Model.PotrzebnyTowar;
 import pl.liebertyesterday.shorti1996.magazyn.R;
 
 public class ZleceniaDostawcyActivity extends AppCompatActivity {
 
     public static final String TAG = ZleceniaActivity.class.getSimpleName();
 
-    public static String extra_potrzebne_towary = "EXTRA_POTRZEBNE_TOWARY";
+    public static final String EXTRA_WYBRANY_DOSTAWCA = "extra-wyb-dost";
 
     private MagazynApi mService;
     private NetworkCaller mCaller;
@@ -119,12 +118,13 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                List<PotrzebnyTowar> potrzebneTowary
-                        = mDostawcy.get(getAdapterPosition()).getPotrzebneTowary();
+//                List<PotrzebnyTowar> potrzebneTowary
+//                        = mDostawcy.get(getAdapterPosition()).getPotrzebneTowary();
+                Dostawca dostawca = mDostawcy.get(getAdapterPosition());
                 Gson gson = new Gson();
-                String jsonString = gson.toJson(potrzebneTowary);
+                String jsonString = gson.toJson(dostawca);
                 Intent intent = new Intent(getApplicationContext(), ZleceniaPredefiniowaneActivity.class);
-                intent.putExtra(extra_potrzebne_towary, jsonString);
+                intent.putExtra(EXTRA_WYBRANY_DOSTAWCA, jsonString);
                 startActivity(intent);
             }
         }
