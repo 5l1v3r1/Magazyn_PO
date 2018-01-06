@@ -1,5 +1,6 @@
 package pl.liebertyesterday.shorti1996.magazyn.View.Logistyk_UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,16 +20,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
 import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Zapotrzebowanie;
 import pl.liebertyesterday.shorti1996.magazyn.R;
 
 public class ZleceniaActivity extends AppCompatActivity {
 
     public static final String TAG = ZleceniaActivity.class.getSimpleName();
+    private static int DOSTAWCY_TOWAR_REQUEST_CODE = 1001;
+
     private MagazynApi mService;
     private NetworkCaller mCaller;
-    private List<Zapotrzebowanie> mZapotrzebowanie = new LinkedList<>();
 
+    private List<Zapotrzebowanie> mZapotrzebowanie = new LinkedList<>();
     @BindView(R.id.zam_rv) RecyclerView mZapotrzebowanieRv;
     @BindView(R.id.zapotrzebowanie_wait_info) TextView mWaitInfo;
 
@@ -45,7 +49,7 @@ public class ZleceniaActivity extends AppCompatActivity {
     private void getDataFromApi() {
         mCaller = new NetworkCaller();
         mService = mCaller.getService();
-        mService.listZapotrzebowanie()
+        mService.getZapotrzebowanie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete(this::setupRecyclerView)
@@ -96,14 +100,22 @@ public class ZleceniaActivity extends AppCompatActivity {
             return mZapotrzebowanie.size();
         }
 
-        class ZamowieniaViewHolder extends RecyclerView.ViewHolder {
+        class ZamowieniaViewHolder extends RecyclerView.ViewHolder
+                implements View.OnClickListener {
+
             @BindView(R.id.zapotrzebowanie_id) TextView mId;
-            @BindView(R.id.zapotrzebowanie_towar) TextView mTowar;
+            @BindView(R.id.dostawca_nazwa) TextView mTowar;
             @BindView(R.id.zapotrzebowanie_ilosc) TextView mIlosc;
 
             ZamowieniaViewHolder(View view) {
                 super(view);
                 ButterKnife.bind(this, view);
+            }
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                startActivityForResult(intent, DOSTAWCY_TOWAR_REQUEST_CODE);
             }
         }
     }

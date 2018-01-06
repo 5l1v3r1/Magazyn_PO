@@ -20,7 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.Logistyk_UI.OrderTypeChoiceActivity" />
-        <activity android:name=".View.Logistyk_UI.ZleceniaActivity"></activity>
+        <activity android:name=".View.Logistyk_UI.ZleceniaActivity" />
+        <activity android:name=".View.Logistyk_UI.ZleceniaDostawcyActivity" />
+        <!--<activity android:name=".View.Logistyk_UI.ZleceniaPredefiniowaneActivity"></activity>-->
+        <activity android:name=".View.Logistyk_UI.ZleceniaPredefiniowaneActivity"/>
     </application>
 
 </manifest>

@@ -21,44 +21,30 @@
             android:layout_height="80dp">
 
             <TextView
-                android:id="@+id/zapotrzebowanie_id"
+                android:id="@+id/dostawca_nazwa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="17" />
+                tools:text="Kordupol" />
 
             <TextView
-                android:id="@+id/dostawca_nazwa"
+                android:id="@+id/dostawca_ile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                app:layout_constraintBottom_toBottomOf="@+id/zapotrzebowanie_id"
-                app:layout_constraintStart_toEndOf="@+id/zapotrzebowanie_id"
-                app:layout_constraintTop_toTopOf="@+id/zapotrzebowanie_id"
-                tools:text="Kocia karma" />
-
-            <TextView
-                android:id="@+id/zapotrzebowanie_ilosc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                app:layout_constraintBottom_toBottomOf="@+id/zapotrzebowanie_id"
+                app:layout_constraintBottom_toBottomOf="@+id/dostawca_nazwa"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/zapotrzebowanie_id"
-                tools:text="33" />
+                app:layout_constraintTop_toTopOf="@+id/dostawca_nazwa"
+                tools:text="13" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 

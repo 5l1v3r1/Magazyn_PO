@@ -38,12 +38,12 @@ public class OrderTypeChoiceActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         zapotrzebowanieBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), ZleceniaActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ZleceniaDostawcyActivity.class);
             startActivity(intent);
 //            NetworkCaller caller = new NetworkCaller();
 //            final MagazynApi service = caller.getService();
 ////            Observable<List<Zapotrzebowanie>> zapotrzebowanie =
-//            service.listZapotrzebowanie()
+//            service.getZapotrzebowanie()
 //                    .subscribeOn(Schedulers.io())
 //                    .observeOn(AndroidSchedulers.mainThread())
 //                    .subscribe(zapotrzebowania -> {
