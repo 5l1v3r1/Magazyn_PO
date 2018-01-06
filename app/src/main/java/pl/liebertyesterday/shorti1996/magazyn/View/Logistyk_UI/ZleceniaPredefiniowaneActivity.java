@@ -1,5 +1,6 @@
 package pl.liebertyesterday.shorti1996.magazyn.View.Logistyk_UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -23,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
 import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.MainActivity;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
 import pl.liebertyesterday.shorti1996.magazyn.Model.PotrzebnyTowar;
 import pl.liebertyesterday.shorti1996.magazyn.Model.WeAreAgile;
@@ -87,19 +90,15 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
                     Log.d(TAG, "utworzZlecenia: " + responseBody.string());
+                    Toast.makeText(getApplicationContext(), R.string.dostawa_wyslana_toast, Toast.LENGTH_LONG).show();
+                    final ZleceniaPredefiniowaneActivity activity = ZleceniaPredefiniowaneActivity.this;
+                    final Intent intent = new Intent(activity, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    activity.startActivity(intent);
+                }, throwable -> {
+                    Log.e(TAG, "utworzZlecenia: Did not post to server", throwable);
+                    Toast.makeText(getApplicationContext(), R.string.nie_wyslano_dostawy_toast, Toast.LENGTH_LONG).show();
                 });
-//        serviceApi.getDostawcy()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .doOnComplete(this::setupRecyclerView)
-//                .subscribe(dostawcy -> {
-//                    for (Dostawca d : dostawcy) {
-//                        Log.d(TAG, String.format("onCreate: dostawca id %s", d.getNrDostawcy()));
-//                        mDostawcy.add(d);
-//                    }
-//                }, throwable -> {
-//                    Log.d(TAG, "onCreate: network error");
-//                });
     }
 
     private void setupRecyclerView() {
