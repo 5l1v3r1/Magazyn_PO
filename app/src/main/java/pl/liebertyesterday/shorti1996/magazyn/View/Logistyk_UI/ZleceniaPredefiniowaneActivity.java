@@ -25,12 +25,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
 import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
-import pl.liebertyesterday.shorti1996.magazyn.MainActivity;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
 import pl.liebertyesterday.shorti1996.magazyn.Model.PotrzebnyTowar;
 import pl.liebertyesterday.shorti1996.magazyn.Model.WeAreAgile;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Zlecenie;
 import pl.liebertyesterday.shorti1996.magazyn.R;
+import pl.liebertyesterday.shorti1996.magazyn.View.MainActivity;
 
 // TODO dodac (un)check all
 public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {

@@ -27,7 +27,7 @@ import pl.liebertyesterday.shorti1996.magazyn.R;
 
 public class ZleceniaDostawcyActivity extends AppCompatActivity {
 
-    public static final String TAG = ZleceniaActivity.class.getSimpleName();
+    public static final String TAG = ZleceniaDostawcyActivity.class.getSimpleName();
 
     public static final String EXTRA_WYBRANY_DOSTAWCA = "extra-wyb-dost";
 
@@ -118,8 +118,6 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-//                List<PotrzebnyTowar> potrzebneTowary
-//                        = mDostawcy.get(getAdapterPosition()).getPotrzebneTowary();
                 Dostawca dostawca = mDostawcy.get(getAdapterPosition());
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(dostawca);

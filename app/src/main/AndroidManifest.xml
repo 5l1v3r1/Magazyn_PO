@@ -12,18 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Logistyk_UI.OrderTypeChoiceActivity" />
-        <activity android:name=".View.Logistyk_UI.ZleceniaActivity" />
-        <activity android:name=".View.Logistyk_UI.ZleceniaDostawcyActivity" />
-        <!--<activity android:name=".View.Logistyk_UI.ZleceniaPredefiniowaneActivity"></activity>-->
-        <activity android:name=".View.Logistyk_UI.ZleceniaPredefiniowaneActivity"/>
+        <activity
+            android:name=".View.Logistyk_UI.OrderTypeChoiceActivity"
+            android:label="Generowanie zleceń" />
+        <activity
+            android:name=".View.Logistyk_UI.ZleceniaDostawcyActivity"
+            android:label="Dostawcy" />
+        <activity
+            android:name=".View.Logistyk_UI.ZleceniaPredefiniowaneActivity"
+            android:label="Zlecenia" />
+        <activity android:name=".View.Magazynier_UI.ZamowieniaListActivity"></activity>
     </application>
 
 </manifest>

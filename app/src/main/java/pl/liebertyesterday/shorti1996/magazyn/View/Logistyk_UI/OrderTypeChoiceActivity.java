@@ -3,7 +3,6 @@ package pl.liebertyesterday.shorti1996.magazyn.View.Logistyk_UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 
 import java.io.IOException;
@@ -12,12 +11,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
-import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
-import pl.liebertyesterday.shorti1996.magazyn.Model.Zapotrzebowanie;
 import pl.liebertyesterday.shorti1996.magazyn.R;
 import retrofit2.Converter;
 import retrofit2.HttpException;
@@ -27,8 +21,8 @@ public class OrderTypeChoiceActivity extends AppCompatActivity {
 
     private static final String TAG = OrderTypeChoiceActivity.class.getSimpleName();
 
-    @BindView(R.id.zapotrzebowan_btn)
-    Button zapotrzebowanieBtn;
+    @BindView(R.id.zlec_dostawcy_btn)
+    Button dostawcyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +31,9 @@ public class OrderTypeChoiceActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        zapotrzebowanieBtn.setOnClickListener(view -> {
+        dostawcyBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), ZleceniaDostawcyActivity.class);
             startActivity(intent);
-//            NetworkCaller caller = new NetworkCaller();
-//            final MagazynApi service = caller.getService();
-////            Observable<List<Zapotrzebowanie>> zapotrzebowanie =
-//            service.getZapotrzebowanie()
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(zapotrzebowania -> {
-//                        for (Zapotrzebowanie z : zapotrzebowania) {
-//                            Log.d(TAG, String.format("onCreate: zapotrzebowanie na %s", z.getTowarId()));
-//                        }
-//                    }, throwable -> {
-//                        Log.d(TAG, "onCreate: network error");
-//                    });
         });
     }
 

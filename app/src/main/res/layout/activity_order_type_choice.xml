@@ -17,10 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/zapotrzebowan_btn"
+        android:id="@+id/zlec_dostawcy_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wyświetl zapotrzebowanie"
+        android:text="Wyświetl dostawców"
         app:layout_constraintStart_toStartOf="@+id/gen_plan_dostaw_btn"
         app:layout_constraintTop_toBottomOf="@+id/gen_plan_dostaw_btn" />
 
