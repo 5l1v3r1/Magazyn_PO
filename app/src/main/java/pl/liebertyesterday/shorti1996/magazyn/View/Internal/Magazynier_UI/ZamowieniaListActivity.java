@@ -1,6 +1,7 @@
 package pl.liebertyesterday.shorti1996.magazyn.View.Internal.Magazynier_UI;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,9 +31,9 @@ import pl.liebertyesterday.shorti1996.magazyn.R;
 public class ZamowieniaListActivity extends AppCompatActivity {
 
     public static final String TAG = ZamowieniaListActivity.class.getSimpleName();
+    public static final String EXTRA_NR_ZAMOWIENIA_DO_KOMPLETOWANIA = "extra-zamowienie-do-kompletowania-id";
 
-    private List<Zamowienie> mZamowienia;
-
+    private List<Zamowienie> mZamowienia = new LinkedList<>();
     @BindView(R.id.zamowienia_rv)
     RecyclerView mZamowieniaRv;
     @BindView(R.id.zamowienia_list_wait_info)
@@ -44,17 +46,10 @@ public class ZamowieniaListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zlecenia_predefiniowane);
+        setContentView(R.layout.activity_zamowienia_list);
 
         ButterKnife.bind(this);
 
-//        mAnulujBtn.setOnClickListener(view -> ZleceniaPredefiniowaneActivity.this.finish());
-//        mGotoweBtn.setOnClickListener(view -> utworzZlecenia());
-//        String dostawcaJson = getIntent().getStringExtra(ZleceniaDostawcyActivity.EXTRA_WYBRANY_DOSTAWCA);
-//        Gson gson = new Gson();
-////        PotrzebnyTowar[] potrzebneTowary = gson.fromJson(potrzebneTowaryJson, PotrzebnyTowar[].class);
-//        mDostawca = gson.fromJson(dostawcaJson, Dostawca.class);
-//        mZamowienia = mDostawca.getPotrzebneTowary();
         getDataFromApi();
     }
 
@@ -71,7 +66,7 @@ public class ZamowieniaListActivity extends AppCompatActivity {
                         mZamowienia.add(z);
                     }
                 }, throwable -> {
-                    Log.d(TAG, "onCreate: network error");
+                    Log.d(TAG, "onCreate: network error", throwable);
                 });
     }
 
@@ -104,7 +99,7 @@ public class ZamowieniaListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ZamowienieViewHolder holder, int position) {
             final Zamowienie zamowienie = mZamowienia.get(position);
-            final String nrZam = String.format("Zamówienie %5d", zamowienie.getNrZamowienia());
+            final String nrZam = String.format("Zamowienie%05d", zamowienie.getNrZamowienia());
             holder.mNazwa.setText(nrZam);
             final String formattedDate = reformatDate(zamowienie);
             holder.mData.setText(formattedDate);
@@ -144,7 +139,10 @@ public class ZamowieniaListActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                // TODO
+                Intent intent = new Intent(ZamowieniaListActivity.this, ZamowienieKompletujActivity.class);
+                intent.putExtra(EXTRA_NR_ZAMOWIENIA_DO_KOMPLETOWANIA,
+                        mZamowienia.get(getAdapterPosition()).getNrZamowienia());
+                startActivity(intent);
             }
         }
     }

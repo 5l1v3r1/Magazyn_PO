@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.MainActivity"
+        <activity
+            android:name=".View.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +30,8 @@
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaPredefiniowaneActivity"
             android:label="Zlecenia" />
-        <activity android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity"></activity>
+        <activity android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity" />
+        <activity android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity"></activity>
     </application>
 
 </manifest>

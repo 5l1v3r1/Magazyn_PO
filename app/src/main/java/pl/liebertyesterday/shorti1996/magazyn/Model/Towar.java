@@ -20,7 +20,7 @@ public class Towar {
     private Integer idTowaru;
     @SerializedName("IloscWMierze")
     @Expose
-    private Integer iloscWMierze;
+    private Double iloscWMierze;
     @SerializedName("Max")
     @Expose
     private Integer max;
@@ -73,11 +73,11 @@ public class Towar {
         this.idTowaru = idTowaru;
     }
 
-    public Integer getIloscWMierze() {
+    public Double getIloscWMierze() {
         return iloscWMierze;
     }
 
-    public void setIloscWMierze(Integer iloscWMierze) {
+    public void setIloscWMierze(Double iloscWMierze) {
         this.iloscWMierze = iloscWMierze;
     }
 

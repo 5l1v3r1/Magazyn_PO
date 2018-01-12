@@ -6,11 +6,13 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Zamowienie;
+import pl.liebertyesterday.shorti1996.magazyn.Model.ZamowienieDoKompletowania;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Zapotrzebowanie;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Zlecenie;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 /**
  * Created by wojciech.liebert on 02.01.2018.
@@ -27,6 +29,12 @@ public interface MagazynApi {
 
     @GET("zamowienia")
     Observable<List<Zamowienie>> getZamowienia();
+
+
+//    @GET("group/{id}/users")
+//    Call<List<User>> groupList(@Path("id") int groupId);
+    @GET("zamowienia/{NrZamowienia}")
+    Observable<ZamowienieDoKompletowania> getZamowienieDoKompletowania(@Path("NrZamowienia") int nrZamowienia);
 
     @PUT("utworz_dostawe")
     Observable<ResponseBody> putUtworzDostawe(@Body List<Zlecenie> zlecenia);
