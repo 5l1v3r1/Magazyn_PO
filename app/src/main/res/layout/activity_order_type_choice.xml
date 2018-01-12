@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.liebertyesterday.shorti1996.magazyn.View.Logistyk_UI.OrderTypeChoiceActivity">
+    tools:context=".View.Internal.Logistyk_UI.OrderTypeChoiceActivity">
 
     <Button
         android:id="@+id/gen_plan_dostaw_btn"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.liebertyesterday.shorti1996.magazyn.View.Magazynier_UI.ZamowieniaListActivity">
+    tools:context=".View.Internal.Magazynier_UI.ZamowieniaListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/zamowienia_rv"

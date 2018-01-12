@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn.View.Logistyk_UI;
+package pl.liebertyesterday.shorti1996.magazyn.View.Internal.Logistyk_UI;
 
 import android.content.Intent;
 import android.os.Bundle;

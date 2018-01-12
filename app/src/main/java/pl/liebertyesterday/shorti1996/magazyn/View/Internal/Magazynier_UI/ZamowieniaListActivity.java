@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn.View.Magazynier_UI;
+package pl.liebertyesterday.shorti1996.magazyn.View.Internal.Magazynier_UI;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
