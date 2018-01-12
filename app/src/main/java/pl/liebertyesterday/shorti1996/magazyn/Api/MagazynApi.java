@@ -31,8 +31,6 @@ public interface MagazynApi {
     Observable<List<Zamowienie>> getZamowienia();
 
 
-//    @GET("group/{id}/users")
-//    Call<List<User>> groupList(@Path("id") int groupId);
     @GET("zamowienia/{NrZamowienia}")
     Observable<ZamowienieDoKompletowania> getZamowienieDoKompletowania(@Path("NrZamowienia") int nrZamowienia);
 

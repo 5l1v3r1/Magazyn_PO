@@ -15,6 +15,9 @@ public class PozycjaZamowienia {
     @SerializedName("IloscZam")
     @Expose
     private Integer iloscZam;
+    @SerializedName("Lokalizacja")
+    @Expose
+    private Lokalizacja lokalizacja;
     @SerializedName("Towar")
     @Expose
     private Towar towar;
@@ -24,6 +27,8 @@ public class PozycjaZamowienia {
     @SerializedName("ZamowienieNrZamowienia")
     @Expose
     private Integer zamowienieNrZamowienia;
+
+    private boolean czySkan;
 
     public Integer getIDPozycjiZamowienia() {
         return iDPozycjiZamowienia;
@@ -39,6 +44,14 @@ public class PozycjaZamowienia {
 
     public void setIloscZam(Integer iloscZam) {
         this.iloscZam = iloscZam;
+    }
+
+    public Lokalizacja getLokalizacja() {
+        return lokalizacja;
+    }
+
+    public void setLokalizacja(Lokalizacja lokalizacja) {
+        this.lokalizacja = lokalizacja;
     }
 
     public Towar getTowar() {
@@ -65,4 +78,11 @@ public class PozycjaZamowienia {
         this.zamowienieNrZamowienia = zamowienieNrZamowienia;
     }
 
+    public Boolean getCzySkan() {
+        return czySkan;
+    }
+
+    public void setCzySkan(Boolean czySkan) {
+        this.czySkan = czySkan;
+    }
 }
