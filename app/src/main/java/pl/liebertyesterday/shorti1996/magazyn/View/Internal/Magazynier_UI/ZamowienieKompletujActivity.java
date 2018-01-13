@@ -1,5 +1,6 @@
 package pl.liebertyesterday.shorti1996.magazyn.View.Internal.Magazynier_UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,6 +58,11 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
         setContentView(R.layout.activity_zamowienie_kompletuj);
 
         ButterKnife.bind(this);
+
+        mSkanujBtn.setOnClickListener(view -> {
+            Intent scanIntent = new Intent(ZamowienieKompletujActivity.this, SimpleScannerActivity.class);
+            startActivityForResult(scanIntent, 1000);
+        });
 
         getDataFromApi();
     }

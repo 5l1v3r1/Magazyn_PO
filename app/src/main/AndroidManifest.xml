@@ -31,7 +31,9 @@
             android:name=".View.Internal.Logistyk_UI.ZleceniaPredefiniowaneActivity"
             android:label="Zlecenia" />
         <activity android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity" />
-        <activity android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity"></activity>
+        <activity android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity" />
+        <activity android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity" />
+        <activity android:name=".View.Internal.Magazynier_UI.BaseScannerActivity"></activity>
     </application>
 
 </manifest>
