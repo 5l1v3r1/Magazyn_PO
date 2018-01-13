@@ -1,14 +1,11 @@
 package pl.liebertyesterday.shorti1996.magazyn.View.Internal.Magazynier_UI;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.zxing.Result;
-import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -22,21 +19,6 @@ public class SimpleScannerActivity extends AppCompatActivity implements ZXingSca
         super.onCreate(state);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
-
-        TedRx2Permission.with(this)
-//                .setRationaleTitle("Title")
-//                .setRationaleMessage("Message") // "we need permission for read contact and find your location"
-                .setPermissions(Manifest.permission.CAMERA)
-                .request()
-                .subscribe(tedPermissionResult -> {
-                    if (!tedPermissionResult.isGranted()) {
-                        Toast.makeText(this,
-                                "Camera permission denied. Can't use scanner.", Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                }, throwable -> {
-                }, () -> {
-                });
     }
 
     @Override
@@ -61,7 +43,7 @@ public class SimpleScannerActivity extends AppCompatActivity implements ZXingSca
         // If you would like to resume scanning, call this method below:
 //        mScannerView.resumeCameraPreview(this);
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("A", "A");
+        resultIntent.putExtra(ZamowienieKompletujActivity.EXTRA_SCAN_RESULT, rawResult.getText());
         setResult(RESULT_OK, resultIntent);
         finish();
     }

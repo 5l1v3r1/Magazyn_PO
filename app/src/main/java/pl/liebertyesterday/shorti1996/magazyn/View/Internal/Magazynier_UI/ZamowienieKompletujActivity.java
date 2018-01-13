@@ -1,5 +1,6 @@
 package pl.liebertyesterday.shorti1996.magazyn.View.Internal.Magazynier_UI;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +33,8 @@ import pl.liebertyesterday.shorti1996.magazyn.R;
 public class ZamowienieKompletujActivity extends AppCompatActivity {
 
     public static final String TAG = ZamowienieKompletujActivity.class.getSimpleName();
+    private static final int SCAN_REQUEST_CODE = 1001;
+    public static final String EXTRA_SCAN_RESULT = "extra-scan-result";
 
     @BindView(R.id.zamowienie_kompletuj_rv)
     RecyclerView mKompletujRv;
@@ -60,8 +66,26 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mSkanujBtn.setOnClickListener(view -> {
-            Intent scanIntent = new Intent(ZamowienieKompletujActivity.this, SimpleScannerActivity.class);
-            startActivityForResult(scanIntent, 1000);
+            TedRx2Permission.with(this)
+//                .setRationaleTitle("Title")
+//                .setRationaleMessage("Message") // "we need permission for read contact and find your location"
+                    .setPermissions(Manifest.permission.CAMERA)
+                    .request()
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(tedPermissionResult -> {
+                        if (tedPermissionResult.isGranted()) {
+                            Intent scanIntent = new Intent(ZamowienieKompletujActivity.this, SimpleScannerActivity.class);
+                            startActivityForResult(scanIntent, SCAN_REQUEST_CODE);
+                        }
+                        else {
+                            Toast.makeText(this,
+                                    "Camera permission denied. Can't use scanner.", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }, throwable -> {
+                    }, () -> {
+                    });
         });
 
         getDataFromApi();
@@ -94,6 +118,19 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
 
     private void hideWaitInfo() {
         mWaitInfo.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SCAN_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.hasExtra(EXTRA_SCAN_RESULT)) {
+                    String result = data.getStringExtra(EXTRA_SCAN_RESULT);
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }
     }
 
     class PozycjaZamowieniaAdapter extends RecyclerView.Adapter<PozycjaZamowieniaAdapter.PozycjaZamowieniaViewHolder> {
