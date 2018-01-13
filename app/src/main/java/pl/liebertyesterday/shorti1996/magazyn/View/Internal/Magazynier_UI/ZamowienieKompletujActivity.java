@@ -56,7 +56,7 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
     private MagazynApi mService;
 
     ZamowienieDoKompletowania mZamowienie;
-    List<PozycjaZamowienia> mPozycjeZamowienia = new LinkedList<PozycjaZamowienia>();
+    List<PozycjaZamowienia> mPozycjeZamowienia = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,10 +127,27 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                 if (data.hasExtra(EXTRA_SCAN_RESULT)) {
                     String result = data.getStringExtra(EXTRA_SCAN_RESULT);
                     Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-
+                    int res = Integer.parseInt(result);
+                    final PozycjaZamowienia pozycjaZamowienia = findPozycjaZamowienia(res);
+                    if (pozycjaZamowienia != null) {
+                        pozycjaZamowienia.setCzySkan(true);
+                        mZamowieniaAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.w(TAG, "onActivityResult: Cos poszlo nie tak");
+                    }
                 }
             }
         }
+    }
+
+    private PozycjaZamowienia findPozycjaZamowienia(int towarId) {
+        for (PozycjaZamowienia pz :
+                mPozycjeZamowienia) {
+            if (pz.getTowarID() == towarId) {
+                return pz;
+            }
+        }
+        return null;
     }
 
     class PozycjaZamowieniaAdapter extends RecyclerView.Adapter<PozycjaZamowieniaAdapter.PozycjaZamowieniaViewHolder> {
