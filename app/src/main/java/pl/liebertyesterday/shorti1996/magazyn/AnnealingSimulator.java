@@ -19,6 +19,9 @@ public class AnnealingSimulator {
         this.travelPath = travelPath;
     }
 
+    /**
+     * Source: http://www.baeldung.com/java-simulated-annealing-for-traveling-salesman
+     */
     public List<Lokalizacja> simulateAnnealing(double startingTemperature, double coolingRate) {
         double t = startingTemperature;
 
@@ -30,6 +33,10 @@ public class AnnealingSimulator {
         double lastImprovementDelta = Integer.MAX_VALUE;
 
         boolean shouldContinue = true;
+
+        // In each step of simulation randomly swap two localisations in the traveling order.
+        // Furthermore, calculate the currentDistance.
+        // If the newly calculated currentDistance is lower than bestDistance, save it as the best.
         while (t > 0.01) {
             travel.swap();
             double currentDistance = travel.getDistance();
@@ -39,7 +46,12 @@ public class AnnealingSimulator {
                 bestDistance = currentDistance;
                 bestPath = new ArrayList<>(lokalizacje);
                 Collections.copy(bestPath, lokalizacje);
-            } else if (Math.exp((bestDistance - currentDistance) / t) < Math.random()) {
+            }
+            // Check if Boltzmann function of probability distribution is lower than randomly picked
+            // value in a range from 0-1.
+            // If it is, revert the swap of the cities.
+            // If not, keep the new order of the cities, as it can help to avoid the local minima.
+            else if (Math.exp((bestDistance - currentDistance) / t) < Math.random()) {
                 travel.revertSwap();
             }
             t *= coolingRate;
