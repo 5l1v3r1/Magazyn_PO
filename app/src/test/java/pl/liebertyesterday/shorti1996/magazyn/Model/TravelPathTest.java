@@ -3,7 +3,6 @@ package pl.liebertyesterday.shorti1996.magazyn.Model;
 import org.junit.Test;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import pl.liebertyesterday.shorti1996.magazyn.AnnealingSimulator;
 
@@ -74,37 +73,5 @@ public class TravelPathTest {
 //        double d = new AnnealingSimulator(new TravelPath(lokalizacje)).
 //                simulateAnnealingForDistance(20, 100000000, 0.1);
         int i = 0;
-    }
-
-    public double simulateAnnealing(double startingTemperature, int numberOfIterations, double coolingRate) {
-        double time = startingTemperature;
-        LinkedList<Lokalizacja> lokalizacje = new LinkedList<Lokalizacja>() {{
-            add(new Lokalizacja(8, 1));
-            add(new Lokalizacja(2, 5));
-            add(new Lokalizacja(2, 3));
-            add(new Lokalizacja(7, 20));
-        }};
-        TravelPath travel = new TravelPath(lokalizacje);
-        double bestDistance = travel.getDistance();
-        List<Lokalizacja> bestPath = travel.mLokalizacje;
-
-        for (int i = 0; i < numberOfIterations; i++) {
-            if (time > 0.1) {
-                travel.swap();
-                double currentDistance = travel.getDistance();
-                if (currentDistance < bestDistance) {
-                    bestDistance = currentDistance;
-                    bestPath = travel.mLokalizacje;
-                } else if (Math.exp((bestDistance - currentDistance) / time) < Math.random()) {
-                    travel.revertSwap();
-                }
-
-                time *= coolingRate;
-            } else {
-                int a = 0;
-                continue;
-            }
-        }
-        return bestDistance;
     }
 }
