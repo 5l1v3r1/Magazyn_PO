@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -49,6 +51,13 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         getDataFromApi();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.zamowienia_dostawcy_menu, menu);
+        return true;
     }
 
     private void getDataFromApi() {
