@@ -26,19 +26,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import pl.liebertyesterday.shorti1996.magazyn.AnnealingSimulator;
 import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
 import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Lokalizacja;
 import pl.liebertyesterday.shorti1996.magazyn.Model.PozycjaZamowienia;
-import pl.liebertyesterday.shorti1996.magazyn.Model.TravelPath;
 import pl.liebertyesterday.shorti1996.magazyn.Model.ZamowienieDoKompletowania;
 import pl.liebertyesterday.shorti1996.magazyn.R;
+import pl.liebertyesterday.shorti1996.magazyn.ShortestPathCalculator;
 
-public class ZamowienieKompletujActivity extends AppCompatActivity {
+public class ZamowienieKompletujActivity extends AppCompatActivity
+        implements ShortestPathCalculator.OnShortestPathFound {
 
     public static final String TAG = ZamowienieKompletujActivity.class.getSimpleName();
     private static final int SCAN_REQUEST_CODE = 1001;
@@ -76,8 +75,8 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
 
         mWpiszBtn.setOnClickListener(view -> {
             new MaterialDialog.Builder(this)
-                    .title("Reczne wprowadzanie ID towaru")
-                    .content("ID znajduje sie na etykiecie pod kodem QR")
+                    .title("Ręczne wprowadzanie ID towaru")
+                    .content("ID znajduje się na etykiecie pod kodem QR")
                     .inputType(InputType.TYPE_CLASS_TEXT)
                     .input("ID towaru", null, (dialog, input) -> {
                         // Do something
@@ -123,7 +122,7 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                 .subscribe(tedPermissionResult -> {
                     if (tedPermissionResult.isGranted()) {
                         Toast.makeText(ZamowienieKompletujActivity.this,
-                                "Zeskanuj swoja lokalizacje",
+                                "Zeskanuj swoją lokalizację",
                                 Toast.LENGTH_LONG).show();
                         Intent scanIntent = new Intent(ZamowienieKompletujActivity.this, SimpleScannerActivity.class);
                         startActivityForResult(scanIntent, SCAN_START_LOC_REQUEST_CODE);
@@ -136,35 +135,19 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                 });
     }
 
-    private void calculateShortestPath(Lokalizacja currentLoc) {
-        List<Lokalizacja> lokalizacje = new LinkedList<>();
-        for (PozycjaZamowienia pz:
-             mPozycjeZamowienia) {
-            lokalizacje.add(pz.getLokalizacja());
-        }
-        lokalizacje.add(0, currentLoc);
-        lokalizacje.add(new Lokalizacja(2,20));
-        lokalizacje.add(new Lokalizacja(8,1));
-        TravelPath travelPath = new TravelPath(lokalizacje);
 
-        Observable.defer(() -> Observable.just(new AnnealingSimulator(travelPath))
-                    .map(annealingSimulator ->
-                        annealingSimulator.simulateAnnealing(100, 0.9999))
-                    .subscribeOn(Schedulers.computation())
-            ).subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::updateRvAfterAnnealingDone);
+    @Override
+    public void onShortestPathFound(List<Lokalizacja> bestPath) {
+        updateRvAfterAnnealingDone(bestPath);
     }
 
     private void updateRvAfterAnnealingDone(List<Lokalizacja> bestPath) {
         List<PozycjaZamowienia> zamowieniaPath = new LinkedList<>();
         for (int i = 0; i < bestPath.size(); i++) {
-            if (i != 0 || i != zamowieniaPath.size() - 1) {
-                for (PozycjaZamowienia pz : mZamowieniaAdapter.mZamowienia) {
-                    if (pz.getLokalizacja().getIDLokalizacji().equals(bestPath.get(i).getIDLokalizacji())) {
-                        zamowieniaPath.add(pz);
-                        break;
-                    }
+            for (PozycjaZamowienia pz : mZamowieniaAdapter.mZamowienia) {
+                if (pz.getLokalizacja().getIDLokalizacji().equals(bestPath.get(i).getIDLokalizacji())) {
+                    zamowieniaPath.add(pz);
+                    break;
                 }
             }
         }
@@ -218,8 +201,9 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                 if (data.hasExtra(EXTRA_SCAN_RESULT)) {
                     String extra = data.getStringExtra(EXTRA_SCAN_RESULT);
                     String[] loc = extra.split("\\.");
-                    calculateShortestPath(
-                            new Lokalizacja(Integer.parseInt(loc[1]), Integer.parseInt(loc[2])));
+                    new ShortestPathCalculator(this).calculateShortestPath(
+                            new Lokalizacja(Integer.parseInt(loc[1]), Integer.parseInt(loc[2])),
+                            mPozycjeZamowienia);
                 }
             }
         }
