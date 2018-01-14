@@ -1,5 +1,7 @@
 package pl.liebertyesterday.shorti1996.magazyn.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by wojciech.liebert on 12.01.2018.
  */
 
-public class PozycjaZamowienia {
+public class PozycjaZamowienia implements Comparable<PozycjaZamowienia> {
 
     @SerializedName("IDPozycjiZamowienia")
     @Expose
@@ -84,5 +86,10 @@ public class PozycjaZamowienia {
 
     public void setCzySkan(Boolean czySkan) {
         this.czySkan = czySkan;
+    }
+
+    @Override
+    public int compareTo(@NonNull PozycjaZamowienia otherZamowienia) {
+        return this.getIDPozycjiZamowienia() - otherZamowienia.getIDPozycjiZamowienia();
     }
 }

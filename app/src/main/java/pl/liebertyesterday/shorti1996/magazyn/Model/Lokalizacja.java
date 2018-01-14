@@ -7,6 +7,10 @@ package pl.liebertyesterday.shorti1996.magazyn.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import static pl.liebertyesterday.shorti1996.magazyn.Model.WeAreAgile.KARA_ZA_ZMIANE_REGALU;
+import static pl.liebertyesterday.shorti1996.magazyn.Model.WeAreAgile.KARA_ZA_ZMIANE_RZADKU_W_REGALE;
+import static pl.liebertyesterday.shorti1996.magazyn.Model.WeAreAgile.WYSOKOSC_REGALU;
+
 public class Lokalizacja {
 
     @SerializedName("IDLokalizacji")
@@ -42,6 +46,14 @@ public class Lokalizacja {
     @SerializedName("WytrzymaloscPolki")
     @Expose
     private Object wytrzymaloscPolki;
+
+    public Lokalizacja() {}
+
+    public Lokalizacja(int nrRegalu, int nrPolki) {
+        this();
+        setNrRegal(nrRegalu);
+        setNrPolki(nrPolki);
+    }
 
     public Integer getIDLokalizacji() {
         return iDLokalizacji;
@@ -129,6 +141,19 @@ public class Lokalizacja {
 
     public void setWytrzymaloscPolki(Object wytrzymaloscPolki) {
         this.wytrzymaloscPolki = wytrzymaloscPolki;
+    }
+
+    public int distanceFrom(Lokalizacja other) {
+        int len;
+        if (getNrRegal().equals(other.getNrRegal())) {
+            len = Math.abs((getNrPolki() / WYSOKOSC_REGALU) * KARA_ZA_ZMIANE_RZADKU_W_REGALE
+                    - other.getNrPolki() / WYSOKOSC_REGALU * KARA_ZA_ZMIANE_RZADKU_W_REGALE);
+        } else {
+            len = Math.abs((getNrPolki() / WYSOKOSC_REGALU) * KARA_ZA_ZMIANE_RZADKU_W_REGALE)
+                    + KARA_ZA_ZMIANE_REGALU * (Math.abs(getNrRegal() - other.getNrRegal()))
+                    + Math.abs((other.getNrPolki() / WYSOKOSC_REGALU) * KARA_ZA_ZMIANE_RZADKU_W_REGALE);
+        }
+        return len;
     }
 
 }

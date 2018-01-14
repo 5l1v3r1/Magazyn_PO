@@ -17,16 +17,21 @@ import android.widget.Toast;
 
 import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import pl.liebertyesterday.shorti1996.magazyn.AnnealingSimulator;
 import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
 import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.Model.Lokalizacja;
 import pl.liebertyesterday.shorti1996.magazyn.Model.PozycjaZamowienia;
+import pl.liebertyesterday.shorti1996.magazyn.Model.TravelPath;
 import pl.liebertyesterday.shorti1996.magazyn.Model.ZamowienieDoKompletowania;
 import pl.liebertyesterday.shorti1996.magazyn.R;
 
@@ -65,6 +70,10 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        mWpiszBtn.setOnClickListener(view -> {
+            calc();
+        });
+
         mSkanujBtn.setOnClickListener(view -> {
             TedRx2Permission.with(this)
 //                .setRationaleTitle("Title")
@@ -91,6 +100,42 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
         getDataFromApi();
     }
 
+    private void calc() {
+        List<Lokalizacja> lokalizacje = new LinkedList<>();
+        for (PozycjaZamowienia pz:
+             mPozycjeZamowienia) {
+            lokalizacje.add(pz.getLokalizacja());
+        }
+        lokalizacje.add(0, new Lokalizacja(1,1));
+        lokalizacje.add(new Lokalizacja(2,20));
+        lokalizacje.add(new Lokalizacja(8,1));
+        TravelPath travelPath = new TravelPath(lokalizacje);
+
+        Observable.defer(() -> Observable.just(new AnnealingSimulator(travelPath))
+                    .map(annealingSimulator ->
+                        annealingSimulator.simulateAnnealing(100, 0.9999))
+                    .subscribeOn(Schedulers.computation())
+            ).subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::a);
+    }
+
+    private void a(List<Lokalizacja> bestPath) {
+        List<PozycjaZamowienia> zamowieniaPath = new LinkedList<>();
+        for (int i = 0; i < bestPath.size(); i++) {
+            if (i != 0 || i != zamowieniaPath.size() - 1) {
+                for (PozycjaZamowienia pz : mZamowieniaAdapter.mZamowienia) {
+                    if (pz.getLokalizacja().getIDLokalizacji().equals(bestPath.get(i).getIDLokalizacji())) {
+                        zamowieniaPath.add(pz);
+                        break;
+                    }
+                }
+            }
+        }
+        mZamowieniaAdapter.mZamowienia = zamowieniaPath;
+        mZamowieniaAdapter.notifyDataSetChanged();
+    }
+
     private void getDataFromApi() {
         mCaller = new NetworkCaller();
         mService = mCaller.getService();
@@ -103,7 +148,9 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                 .subscribe(zamowienieDoKompletowania -> {
                     Log.d(TAG, String.format("Zamowienie id %s", zamowienieDoKompletowania.getNrZamowienia()));
                     mZamowienie = zamowienieDoKompletowania;
-                    mPozycjeZamowienia = zamowienieDoKompletowania.getPozycjeZamowienia();
+                    List<PozycjaZamowienia> pozycje = zamowienieDoKompletowania.getPozycjeZamowienia();
+                    Collections.sort(pozycje, (p1, p2) -> p2.getLokalizacja().getNrRegal() - p1.getLokalizacja().getNrPolki());
+                    mPozycjeZamowienia = pozycje;
                 }, throwable -> {
                     Log.d(TAG, "onCreate: network error", throwable);
                 });
