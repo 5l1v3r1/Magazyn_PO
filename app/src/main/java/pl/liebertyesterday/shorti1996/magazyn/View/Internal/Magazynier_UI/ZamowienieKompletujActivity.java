@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
 import java.util.Collections;
@@ -39,6 +42,7 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
 
     public static final String TAG = ZamowienieKompletujActivity.class.getSimpleName();
     private static final int SCAN_REQUEST_CODE = 1001;
+    private static final int SCAN_START_LOC_REQUEST_CODE = 1002;
     public static final String EXTRA_SCAN_RESULT = "extra-scan-result";
 
     @BindView(R.id.zamowienie_kompletuj_rv)
@@ -71,42 +75,74 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mWpiszBtn.setOnClickListener(view -> {
-            calc();
+            new MaterialDialog.Builder(this)
+                    .title("Reczne wprowadzanie ID towaru")
+                    .content("ID znajduje sie na etykiecie pod kodem QR")
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .input("ID towaru", null, (dialog, input) -> {
+                        // Do something
+                    }).onPositive((dialog, which) -> {
+                        EditText editText = dialog.getInputEditText();
+                        if (editText != null) {
+                            handleTowarIdInput(editText.getText().toString());
+                    }}).show();
         });
 
         mSkanujBtn.setOnClickListener(view -> {
             TedRx2Permission.with(this)
-//                .setRationaleTitle("Title")
-//                .setRationaleMessage("Message") // "we need permission for read contact and find your location"
                     .setPermissions(Manifest.permission.CAMERA)
                     .request()
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(Schedulers.io())
                     .subscribe(tedPermissionResult -> {
                         if (tedPermissionResult.isGranted()) {
                             Intent scanIntent = new Intent(ZamowienieKompletujActivity.this, SimpleScannerActivity.class);
                             startActivityForResult(scanIntent, SCAN_REQUEST_CODE);
                         }
                         else {
-                            Toast.makeText(this,
-                                    "Camera permission denied. Can't use scanner.", Toast.LENGTH_SHORT)
-                                    .show();
+                            showToastCantUseCamera();
                         }
                     }, throwable -> {
                     }, () -> {
                     });
         });
 
+        mAnulujBtn.setOnClickListener(view -> finish());
+
         getDataFromApi();
     }
 
-    private void calc() {
+    private void showToastCantUseCamera() {
+        Toast.makeText(this,
+                "Camera permission denied. Can't use scanner.", Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    private void askForStartLocation() {
+        TedRx2Permission.with(this)
+                .setPermissions(Manifest.permission.CAMERA)
+                .request()
+                .subscribe(tedPermissionResult -> {
+                    if (tedPermissionResult.isGranted()) {
+                        Toast.makeText(ZamowienieKompletujActivity.this,
+                                "Zeskanuj swoja lokalizacje",
+                                Toast.LENGTH_LONG).show();
+                        Intent scanIntent = new Intent(ZamowienieKompletujActivity.this, SimpleScannerActivity.class);
+                        startActivityForResult(scanIntent, SCAN_START_LOC_REQUEST_CODE);
+                    }
+                    else {
+                        showToastCantUseCamera();
+                    }
+                }, throwable -> {
+                }, () -> {
+                });
+    }
+
+    private void calculateShortestPath(Lokalizacja currentLoc) {
         List<Lokalizacja> lokalizacje = new LinkedList<>();
         for (PozycjaZamowienia pz:
              mPozycjeZamowienia) {
             lokalizacje.add(pz.getLokalizacja());
         }
-        lokalizacje.add(0, new Lokalizacja(1,1));
+        lokalizacje.add(0, currentLoc);
         lokalizacje.add(new Lokalizacja(2,20));
         lokalizacje.add(new Lokalizacja(8,1));
         TravelPath travelPath = new TravelPath(lokalizacje);
@@ -117,10 +153,10 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                     .subscribeOn(Schedulers.computation())
             ).subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::a);
+            .subscribe(this::updateRvAfterAnnealingDone);
     }
 
-    private void a(List<Lokalizacja> bestPath) {
+    private void updateRvAfterAnnealingDone(List<Lokalizacja> bestPath) {
         List<PozycjaZamowienia> zamowieniaPath = new LinkedList<>();
         for (int i = 0; i < bestPath.size(); i++) {
             if (i != 0 || i != zamowieniaPath.size() - 1) {
@@ -151,6 +187,7 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
                     List<PozycjaZamowienia> pozycje = zamowienieDoKompletowania.getPozycjeZamowienia();
                     Collections.sort(pozycje, (p1, p2) -> p2.getLokalizacja().getNrRegal() - p1.getLokalizacja().getNrPolki());
                     mPozycjeZamowienia = pozycje;
+                    askForStartLocation();
                 }, throwable -> {
                     Log.d(TAG, "onCreate: network error", throwable);
                 });
@@ -173,18 +210,52 @@ public class ZamowienieKompletujActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 if (data.hasExtra(EXTRA_SCAN_RESULT)) {
                     String result = data.getStringExtra(EXTRA_SCAN_RESULT);
-                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-                    int res = Integer.parseInt(result);
-                    final PozycjaZamowienia pozycjaZamowienia = findPozycjaZamowienia(res);
-                    if (pozycjaZamowienia != null) {
-                        pozycjaZamowienia.setCzySkan(true);
-                        mZamowieniaAdapter.notifyDataSetChanged();
-                    } else {
-                        Log.w(TAG, "onActivityResult: Cos poszlo nie tak");
-                    }
+                    handleTowarIdInput(result);
+                }
+            }
+        } else if (requestCode == SCAN_START_LOC_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.hasExtra(EXTRA_SCAN_RESULT)) {
+                    String extra = data.getStringExtra(EXTRA_SCAN_RESULT);
+                    String[] loc = extra.split("\\.");
+                    calculateShortestPath(
+                            new Lokalizacja(Integer.parseInt(loc[1]), Integer.parseInt(loc[2])));
                 }
             }
         }
+    }
+
+    private void handleTowarIdInput(String result) {
+//        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+        int res;
+        try {
+            res = Integer.parseInt(result);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "handleTowarIdInput: Wrong code scanned", e);
+            return;
+        }
+        final PozycjaZamowienia pozycjaZamowienia = findPozycjaZamowienia(res);
+        if (pozycjaZamowienia != null) {
+            pozycjaZamowienia.setCzySkan(true);
+            mZamowieniaAdapter.notifyDataSetChanged();
+            checkIfCompleted();
+        } else {
+            Log.w(TAG, "Cos poszlo nie tak");
+        }
+    }
+
+    private void checkIfCompleted() {
+        for (PozycjaZamowienia pz : mPozycjeZamowienia) {
+            if (!pz.getCzySkan()) {
+                return;
+            }
+        }
+        new MaterialDialog.Builder(this)
+                .title("Zamowienie zostalo skompletowane")
+                .content("Dostarcz je do depozytu klienckiego")
+                .positiveText("OK")
+                .onPositive((dialog, which) -> finish())
+                .show();
     }
 
     private PozycjaZamowienia findPozycjaZamowienia(int towarId) {
