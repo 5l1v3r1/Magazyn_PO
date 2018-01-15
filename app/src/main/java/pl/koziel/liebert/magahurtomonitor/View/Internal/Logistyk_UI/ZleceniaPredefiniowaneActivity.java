@@ -62,6 +62,10 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
         setupRecyclerView();
     }
 
+    /**
+     * Tworzy zlecenia z zaznaczonych towarów
+     * oraz uruchamia aktywność potwierdzenia zamówienia
+     */
     private void utworzZlecenia() {
         List<Zlecenie> zlecenia = new LinkedList<>();
         List<PotrzebnyTowar> doZamowienia = new LinkedList<>();

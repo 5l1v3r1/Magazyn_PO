@@ -18,6 +18,9 @@ import pl.koziel.liebert.magahurtomonitor.R;
  * Created by wojciech.liebert on 15.01.2018.
  */
 
+/**
+ * Adapter dla PredefiniowaneZlecenie. Jest użyty ponownie w podsumowaniu zamówienia.
+ */
 public class PredefZlecAdapter extends RecyclerView.Adapter<PredefZlecAdapter.PotrzebnyTowarViewHolder> {
     public List<PotrzebnyTowar> mPotrzebneTowary;
 

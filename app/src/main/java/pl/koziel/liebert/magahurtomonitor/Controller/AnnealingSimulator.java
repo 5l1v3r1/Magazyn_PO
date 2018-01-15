@@ -11,6 +11,11 @@ import pl.koziel.liebert.magahurtomonitor.Model.TravelPath;
  * Created by wojciech.liebert on 13.01.2018.
  */
 
+/**
+ * Klasa implementująca algorytm zainspirowany procesem wyrzażania w metalurgii.
+ * Rozwiązuje problem komiwojażera-
+ * zebrania wszystkich potrzebnych towarów pokonując jak najkrótszą drogę
+ */
 public class AnnealingSimulator {
 
     TravelPath travelPath;
@@ -20,7 +25,11 @@ public class AnnealingSimulator {
     }
 
     /**
+     * Przeprowadzenie symulacji mającej na celu wyznaczenie najkrótszej ścieżki
      * Source: http://www.baeldung.com/java-simulated-annealing-for-traveling-salesman
+     * @param startingTemperature energia systemu w momencie początkowym
+     * @param coolingRate procent spadku temperatury w każdym kroku
+     * @return Lista lokalizacji uporządkowana w optymalny sposób
      */
     public List<Lokalizacja> simulateAnnealing(double startingTemperature, double coolingRate) {
         double t = startingTemperature;
@@ -60,6 +69,13 @@ public class AnnealingSimulator {
         return bestPath;
     }
 
+    /**
+     * Wywołuje metodę {@link #simulateAnnealing(double, double)}, ale zamiast najkrótszej ścieżki
+     * zwraca jej długość
+     * @param startingTemperature
+     * @param coolingRate
+     * @return długość najkrótszej ścieżki
+     */
     public double simulateAnnealingForDistance(double startingTemperature, double coolingRate) {
         List<Lokalizacja> lokalizacje = simulateAnnealing(startingTemperature, coolingRate);
         return new TravelPath(lokalizacje).getDistance();

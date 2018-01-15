@@ -18,6 +18,9 @@ import retrofit2.http.Path;
  * Created by wojciech.liebert on 02.01.2018.
  */
 
+/**
+ * Interfejs służący do komunikacji z API. Musi być używany z Retrofit
+ */
 public interface MagazynApi {
     String SERVICE_ENDPOINT = "http://shorti1996.pythonanywhere.com/";
 

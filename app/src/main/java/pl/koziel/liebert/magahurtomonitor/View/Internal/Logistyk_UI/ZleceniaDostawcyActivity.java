@@ -75,6 +75,9 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sortuje dostawów malejąco według ilości zamówień, jakie można u nich złożyć.
+     */
     private void sortDostawcy() {
         if (mDostawcyAdapter!= null
                 && mDostawcyAdapter.mDostawcy != null

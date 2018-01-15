@@ -4,6 +4,9 @@ package pl.koziel.liebert.magahurtomonitor.Model;
  * Created by wojciech.liebert on 06.01.2018.
  */
 
+/**
+ * Klasa będąca kontenerem dla warości, które będą dynamiczne w późniejszej fazie rozbudowywania systemu.
+ */
 public class WeAreAgile {
     public static final int NUMER_LOGISTYKA = 1;
     public static final int WYSOKOSC_REGALU = 5;

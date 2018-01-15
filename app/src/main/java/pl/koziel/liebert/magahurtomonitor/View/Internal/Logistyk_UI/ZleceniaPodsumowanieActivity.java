@@ -2,7 +2,6 @@ package pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -83,7 +82,9 @@ public class ZleceniaPodsumowanieActivity extends AppCompatActivity {
         });
     }
 
-    @NonNull
+    /**
+     * Pobiera dane przekazane z poprzedniej aktywności
+     */
     private void parseExtras() {
         String extraZlecenia = getIntent().getStringExtra(ZleceniaPredefiniowaneActivity.EXTRA_ZLECENIA);
         Zlecenie[] zleceniaArr = new Gson().fromJson(extraZlecenia, Zlecenie[].class);

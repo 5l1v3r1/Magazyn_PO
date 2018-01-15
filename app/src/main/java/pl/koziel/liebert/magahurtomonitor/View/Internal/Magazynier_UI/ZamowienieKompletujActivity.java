@@ -123,6 +123,9 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
                 .show();
     }
 
+    /**
+     * Odpytuje o startową lokalizację, która jest potrzebna do wyliczania najkrótszej ścieżki
+     */
     private void askForStartLocation() {
         TedRx2Permission.with(this)
                 .setPermissions(Manifest.permission.CAMERA)
@@ -258,6 +261,11 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
                 .show();
     }
 
+    /**
+     * Znajduje PozycjaZamowienia zawierającą towar o podanym ID towaru
+     * @param towarId ID towaru do znalezienia
+     * @return PozycjaZamowienia zawierającą towar
+     */
     private PozycjaZamowienia findPozycjaZamowienia(int towarId) {
         for (PozycjaZamowienia pz :
                 mPozycjeZamowienia) {

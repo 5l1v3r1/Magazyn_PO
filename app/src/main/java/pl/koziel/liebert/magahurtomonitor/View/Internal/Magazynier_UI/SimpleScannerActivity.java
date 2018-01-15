@@ -9,6 +9,9 @@ import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+/**
+ * Aktywność umożliwiająca używanie skanera kodów QR
+ */
 public class SimpleScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     public static final String TAG = SimpleScannerActivity.class.getSimpleName();
 

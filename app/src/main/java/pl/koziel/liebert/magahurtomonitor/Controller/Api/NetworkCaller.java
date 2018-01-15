@@ -9,6 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by wojciech.liebert on 02.01.2018.
  */
 
+/**
+ * Klasa porządkująca zapytania do API
+ */
 public class NetworkCaller {
 
     private Retrofit retrofit;
@@ -18,6 +21,9 @@ public class NetworkCaller {
         setupCaller();
     }
 
+    /**
+     * Przygotowuje tę instancję obiektu do działania z MagazynApi
+     */
     private void setupCaller() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MagazynApi.SERVICE_ENDPOINT)
