@@ -37,6 +37,9 @@ import pl.koziel.liebert.magahurtomonitor.Model.PozycjaZamowienia;
 import pl.koziel.liebert.magahurtomonitor.Model.ZamowienieDoKompletowania;
 import pl.koziel.liebert.magahurtomonitor.R;
 
+/**
+ * Aktywność kompletowania zamówienia
+ */
 public class ZamowienieKompletujActivity extends AppCompatActivity
         implements ShortestPathCalculator.OnShortestPathFound {
 

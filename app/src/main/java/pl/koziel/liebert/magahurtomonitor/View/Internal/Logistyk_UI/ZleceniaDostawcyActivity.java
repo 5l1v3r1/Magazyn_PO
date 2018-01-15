@@ -30,6 +30,9 @@ import pl.koziel.liebert.magahurtomonitor.Controller.Api.NetworkCaller;
 import pl.koziel.liebert.magahurtomonitor.Model.Dostawca;
 import pl.koziel.liebert.magahurtomonitor.R;
 
+/**
+ * Aktywność z listą dostawców.
+ */
 public class ZleceniaDostawcyActivity extends AppCompatActivity {
 
     public static final String TAG = ZleceniaDostawcyActivity.class.getSimpleName();

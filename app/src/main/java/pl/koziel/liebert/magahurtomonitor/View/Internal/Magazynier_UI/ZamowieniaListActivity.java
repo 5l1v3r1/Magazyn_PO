@@ -28,6 +28,9 @@ import pl.koziel.liebert.magahurtomonitor.Controller.Api.NetworkCaller;
 import pl.koziel.liebert.magahurtomonitor.Model.Zamowienie;
 import pl.koziel.liebert.magahurtomonitor.R;
 
+/**
+ * Aktywność zawierająca listę zamówien wymagających kompletacji
+ */
 public class ZamowieniaListActivity extends AppCompatActivity {
 
     public static final String TAG = ZamowieniaListActivity.class.getSimpleName();

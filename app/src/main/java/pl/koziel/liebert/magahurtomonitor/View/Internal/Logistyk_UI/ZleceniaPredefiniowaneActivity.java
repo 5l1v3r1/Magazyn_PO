@@ -25,7 +25,9 @@ import pl.koziel.liebert.magahurtomonitor.Model.WeAreAgile;
 import pl.koziel.liebert.magahurtomonitor.Model.Zlecenie;
 import pl.koziel.liebert.magahurtomonitor.R;
 
-// TODO dodac (un)check all
+/**
+ * Aktywność zawierająca predefiniowane zamówienia wybranego dostawcy.
+ */
 public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
 
     public static final String TAG = ZleceniaPredefiniowaneActivity.class.getSimpleName();

@@ -28,6 +28,9 @@ import pl.koziel.liebert.magahurtomonitor.Model.Zlecenie;
 import pl.koziel.liebert.magahurtomonitor.R;
 import pl.koziel.liebert.magahurtomonitor.View.MainActivity;
 
+/**
+ * Aktywność zawierająca listę zleceń, które zostaną wysłane na serwer
+ */
 public class ZleceniaPodsumowanieActivity extends AppCompatActivity {
 
     public static final String TAG = ZleceniaPodsumowanieActivity.class.getSimpleName();

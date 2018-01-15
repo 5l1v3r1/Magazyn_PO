@@ -18,6 +18,10 @@ import retrofit2.Converter;
 import retrofit2.HttpException;
 import retrofit2.Retrofit;
 
+/**
+ * Aktywność wybierania typu trybu tworzenia zleceń.
+ * Do wyboru jest opcja ręcznego i automatycznego generowania zleceń.
+ */
 public class OrderTypeChoiceActivity extends AppCompatActivity {
 
     private static final String TAG = OrderTypeChoiceActivity.class.getSimpleName();
