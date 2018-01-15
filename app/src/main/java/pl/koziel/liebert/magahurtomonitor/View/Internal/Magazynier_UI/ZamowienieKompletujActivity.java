@@ -1,6 +1,7 @@
 package pl.koziel.liebert.magahurtomonitor.View.Internal.Magazynier_UI;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -82,9 +83,16 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
                         // Do something
                     }).onPositive((dialog, which) -> {
                         EditText editText = dialog.getInputEditText();
-                        if (editText != null) {
-                            handleTowarIdInput(editText.getText().toString());
-                    }}).show();
+                if (editText != null) {
+                    String result = editText.getText().toString();
+                    if (!result.equals("")) {
+                        handleTowarIdInput(result);
+                    } else {
+                        Toast.makeText(ZamowienieKompletujActivity.this,
+                                "Należy podać kod towaru",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }}).show();
         });
 
         mSkanujBtn.setOnClickListener(view -> {
@@ -209,13 +217,17 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private void handleTowarIdInput(String result) {
-//        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
         int res;
         try {
             res = Integer.parseInt(result);
         } catch (NumberFormatException e) {
-            Log.e(TAG, "handleTowarIdInput: Wrong code scanned", e);
+            String msg = String.format("Niepoprawny kod towaru: \"%s\"", result);
+            Toast.makeText(this,
+                    msg,
+                    Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "handleTowarIdInput: Wrong code", e);
             return;
         }
         final PozycjaZamowienia pozycjaZamowienia = findPozycjaZamowienia(res);
@@ -224,7 +236,11 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
             mZamowieniaAdapter.notifyDataSetChanged();
             checkIfCompleted();
         } else {
-            Log.w(TAG, "Cos poszlo nie tak");
+            String msg = String.format("Nie znaleziono towaru o id %d", res);
+            Toast.makeText(this,
+                    msg,
+                    Toast.LENGTH_SHORT).show();
+            Log.w(TAG, msg);
         }
     }
 
