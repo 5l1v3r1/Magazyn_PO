@@ -73,7 +73,7 @@ public class ZleceniaPodsumowanieActivity extends AppCompatActivity {
                     final ZleceniaPodsumowanieActivity activity = ZleceniaPodsumowanieActivity.this;
                     final Intent intent = new Intent(activity, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    Toast.makeText(activity, "Dostawa utworzona", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "Dostawa utworzona", Toast.LENGTH_SHORT).show();
                     activity.startActivity(intent);
                 }, throwable -> {
                     Log.e(TAG, "utworzZlecenia: Did not post to server", throwable);

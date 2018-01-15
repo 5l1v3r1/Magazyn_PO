@@ -7,6 +7,9 @@ import java.util.List;
  * Created by wojciech.liebert on 13.01.2018.
  */
 
+/**
+ * Uporządkowana ścieżka łącząca lokalizacje
+ */
 public class TravelPath {
 
     public List<Lokalizacja> mLokalizacje = new LinkedList<>();
@@ -16,6 +19,9 @@ public class TravelPath {
         mLokalizacje = lokalizacje;
     }
 
+    /**
+     * @return Odległość pomiędzy dwiema lokalizacjami
+     */
     public int getDistance() {
         int distance = 0;
         for (int i = 0; i < mLokalizacje.size() - 1; i++) {
@@ -24,6 +30,9 @@ public class TravelPath {
         return distance;
     }
 
+    /**
+     * Zamienia kolejnością dwie wybrane losowo lokalizacje na ścieżce
+     */
     public void swap() {
         mPrev = mLokalizacje;
         int a = generateRandomIndex();
@@ -34,6 +43,9 @@ public class TravelPath {
         mLokalizacje.set(b, x);
     }
 
+    /**
+     * Cofa ostatnią zamianę dokonaną za pomocą {@link #swap()}
+     */
     public void revertSwap() {
         if (mPrev != null) {
             mLokalizacje = mPrev;

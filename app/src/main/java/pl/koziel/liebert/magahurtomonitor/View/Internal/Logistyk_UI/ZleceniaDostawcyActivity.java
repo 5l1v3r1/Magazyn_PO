@@ -84,15 +84,19 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
                 && !mDostawcyAdapter.mDostawcy.isEmpty()) {
             Collections.sort(mDostawcyAdapter.mDostawcy,
                     (d1, d2) -> d2.getIleZapotrzebowan() - d1.getIleZapotrzebowan());
-            List<Dostawca> toRemove = new ArrayList<>();
-            for (int i = 0; i < mDostawcyAdapter.mDostawcy.size(); i++) {
-                if (mDostawcyAdapter.mDostawcy.get(i).getIleZapotrzebowan() <= 0) {
-                    toRemove.add(mDostawcyAdapter.mDostawcy.get(i));
-                }
-            }
-            mDostawcyAdapter.mDostawcy.removeAll(toRemove);
+            removeEmptyDostawca(mDostawcyAdapter.mDostawcy);
             mDostawcyAdapter.notifyDataSetChanged();
         }
+    }
+
+    private void removeEmptyDostawca(List<Dostawca> dostawcy) {
+        List<Dostawca> toRemove = new ArrayList<>();
+        for (int i = 0; i < dostawcy.size(); i++) {
+            if (dostawcy.get(i).getIleZapotrzebowan() <= 0) {
+                toRemove.add(dostawcy.get(i));
+            }
+        }
+        dostawcy.removeAll(toRemove);
     }
 
     private void getDataFromApi() {
@@ -107,6 +111,7 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
                         Log.d(TAG, String.format("onCreate: dostawca id %s", d.getNrDostawcy()));
                         mDostawcy.add(d);
                     }
+                    removeEmptyDostawca(mDostawcy);
                 }, throwable -> {
                     Log.d(TAG, "onCreate: network error");
                 });

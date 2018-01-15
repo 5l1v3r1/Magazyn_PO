@@ -17,10 +17,20 @@ import pl.koziel.liebert.magahurtomonitor.Model.TravelPath;
  * Created by wojciech.liebert on 14.01.2018.
  */
 
+/**
+ * Pozwala asynchronicznie wyznaczyć najktótszą ścieżkę dla kompletowania zamówienia
+ */
 public class ShortestPathCalculator {
     private OnShortestPathFound callback;
 
+    /**
+     * Interfejs, dzięki któremu można zasygnalizować zakończenie obliczeń
+     */
     public interface OnShortestPathFound {
+        /**
+         * Zakończenie obliczeń
+         * @param bestPath Wyznaczona optymalna trasa
+         */
         void onShortestPathFound(List<Lokalizacja> bestPath);
     }
 
@@ -28,6 +38,11 @@ public class ShortestPathCalculator {
         this.callback = callback;
     }
 
+    /**
+     * Oblicza optymalną ścieżkę
+     * @param currentLoc Pozycja początkowa
+     * @param pozycjeZamowienia Lista pozycji zamówienia
+     */
     public void calculateShortestPath(Lokalizacja currentLoc, List<PozycjaZamowienia> pozycjeZamowienia) {
         List<Lokalizacja> lokalizacje = new LinkedList<>();
         for (PozycjaZamowienia pz:

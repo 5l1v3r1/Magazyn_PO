@@ -19,7 +19,8 @@ import pl.koziel.liebert.magahurtomonitor.R;
  */
 
 /**
- * Adapter dla PredefiniowaneZlecenie. Jest użyty ponownie w podsumowaniu zamówienia.
+ * Adapter dla PredefiniowaneZlecenie. Jest użyty w {@link pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI.ZleceniaPredefiniowaneActivity}
+ * oraz ponownie w podsumowaniu zamówienia {@link pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI.ZleceniaPodsumowanieActivity}.
  */
 public class PredefZlecAdapter extends RecyclerView.Adapter<PredefZlecAdapter.PotrzebnyTowarViewHolder> {
     public List<PotrzebnyTowar> mPotrzebneTowary;
