@@ -25,6 +25,24 @@ public class Zlecenie {
     @Expose
     private int nrDostawcy;
 
+    public Zlecenie(){}
+
+    public Zlecenie(int ilosc, int idZapotrz) {
+        this();
+        setIloscZlec(ilosc);
+        setZapotrzebowanieId(idZapotrz);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Zlecenie) {
+            Zlecenie z = ((Zlecenie) obj);
+            return this.getDostawaId() == z.getDostawaId() && this.getIloscZlec() == z.getIloscZlec();
+        } else {
+            return super.equals(obj);
+        }
+    }
+
     public int getIloscZlec() {
         return iloscZlec;
     }

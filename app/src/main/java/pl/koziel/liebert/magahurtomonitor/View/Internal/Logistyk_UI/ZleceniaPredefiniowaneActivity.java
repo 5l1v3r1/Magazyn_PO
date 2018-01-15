@@ -2,6 +2,7 @@ package pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +54,7 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAnulujBtn.setOnClickListener(view -> ZleceniaPredefiniowaneActivity.this.finish());
-        mGotoweBtn.setOnClickListener(view -> utworzZlecenia());
+        mGotoweBtn.setOnClickListener(view -> utworzZlecenia(mPredefZlecAdapter.mPotrzebneTowary));
         String dostawcaJson = getIntent().getStringExtra(ZleceniaDostawcyActivity.EXTRA_WYBRANY_DOSTAWCA);
         Gson gson = new Gson();
 //        PotrzebnyTowar[] potrzebneTowary = gson.fromJson(potrzebneTowaryJson, PotrzebnyTowar[].class);
@@ -66,20 +67,11 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
      * Tworzy zlecenia z zaznaczonych towarów
      * oraz uruchamia aktywność potwierdzenia zamówienia
      */
-    private void utworzZlecenia() {
-        List<Zlecenie> zlecenia = new LinkedList<>();
-        List<PotrzebnyTowar> doZamowienia = new LinkedList<>();
-        for (PotrzebnyTowar pt : mPredefZlecAdapter.mPotrzebneTowary) {
-            if (pt.isCzyZamowic()) {
-                doZamowienia.add(pt);
-                Zlecenie zlecenie = new Zlecenie();
-                zlecenie.setIloscZlec(pt.getDoZamowienia());
-                zlecenie.setZapotrzebowanieId(pt.getIdZapotrzebowania());
-                zlecenie.setLogistykNrLogistyka(WeAreAgile.NUMER_LOGISTYKA);
-                zlecenie.setNrDostawcy(mDostawca.getNrDostawcy());
-                zlecenia.add(zlecenie);
-            }
-        }
+    private void utworzZlecenia(List<PotrzebnyTowar> potrzebneTowary) {
+        PotrzebneTowaryOrazZleceniaHelper towaryZleceniaHelper
+                = new PotrzebneTowaryOrazZleceniaHelper(potrzebneTowary, mDostawca.getNrDostawcy()).invoke();
+        List<PotrzebnyTowar> doZamowienia = towaryZleceniaHelper.getDoZamowienia();
+        List<Zlecenie> zlecenia = towaryZleceniaHelper.getZlecenia();
 
         if (doZamowienia.isEmpty()) {
             Toast.makeText(this, "Nie można złożyć pustego zamówienia", Toast.LENGTH_SHORT).show();
@@ -106,4 +98,41 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
         mWaitInfo.setVisibility(View.GONE);
     }
 
+    @VisibleForTesting
+    static class PotrzebneTowaryOrazZleceniaHelper {
+        private List<PotrzebnyTowar> potrzebneTowary;
+        private int dostawcaId;
+        private List<Zlecenie> zlecenia;
+        private List<PotrzebnyTowar> doZamowienia;
+
+        public PotrzebneTowaryOrazZleceniaHelper(List<PotrzebnyTowar> potrzebneTowary, int dostawcaId) {
+            this.potrzebneTowary = potrzebneTowary;
+            this.dostawcaId = dostawcaId;
+        }
+
+        public List<Zlecenie> getZlecenia() {
+            return zlecenia;
+        }
+
+        public List<PotrzebnyTowar> getDoZamowienia() {
+            return doZamowienia;
+        }
+
+        public PotrzebneTowaryOrazZleceniaHelper invoke() {
+            zlecenia = new LinkedList<>();
+            doZamowienia = new LinkedList<>();
+            for (PotrzebnyTowar pt : potrzebneTowary) {
+                if (pt.isCzyZamowic()) {
+                    doZamowienia.add(pt);
+                    Zlecenie zlecenie = new Zlecenie();
+                    zlecenie.setIloscZlec(pt.getDoZamowienia());
+                    zlecenie.setZapotrzebowanieId(pt.getIdZapotrzebowania());
+                    zlecenie.setLogistykNrLogistyka(WeAreAgile.NUMER_LOGISTYKA);
+                    zlecenie.setNrDostawcy(dostawcaId);
+                    zlecenia.add(zlecenie);
+                }
+            }
+            return this;
+        }
     }
+}

@@ -50,7 +50,7 @@ public class ShortestPathCalculator {
     }
 
     @VisibleForTesting
-    void addStartAndEndLoc(@NonNull Lokalizacja currentLoc, @NonNull List<Lokalizacja> lokalizacje) {
+    public void addStartAndEndLoc(@NonNull Lokalizacja currentLoc, @NonNull List<Lokalizacja> lokalizacje) {
         // Add start position
         lokalizacje.add(0, currentLoc);
         // Add end position

@@ -17,6 +17,17 @@ public class PotrzebnyTowar extends Towar {
     private int idZapotrzebowania;
     private boolean czyZamowic;
 
+    public PotrzebnyTowar(){}
+
+    public PotrzebnyTowar(int idTowaru, int doZam, boolean czyZam, String nazwa, int idZapotrz) {
+        this();
+        setIDTowaru(idTowaru);
+        setNazwa(nazwa);
+        setDoZamowienia(doZam);
+        setCzyZamowic(czyZam);
+        setIdZapotrzebowania(idZapotrz);
+    }
+
     public Integer getDoZamowienia() {
         return doZamowienia;
     }
