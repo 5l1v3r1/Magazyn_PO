@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:screenOrientation="portrait"
             android:name=".View.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -23,18 +24,25 @@
         </activity>
         <activity
             android:name=".View.Internal.Logistyk_UI.OrderTypeChoiceActivity"
-            android:label="Generowanie zleceń" />
+            android:label="Generowanie zleceń"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaDostawcyActivity"
-            android:label="Dostawcy" />
+            android:label="Dostawcy"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaPredefiniowaneActivity"
-            android:label="Zlecenia" />
+            android:label="Zlecenia"
+            android:screenOrientation="portrait"/>
         <activity android:name=".View.Internal.Logistyk_UI.ZleceniaPodsumowanieActivity"
-            android:label="Podsumowanie"/>
-        <activity android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity" />
-        <activity android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity" />
-        <activity android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity" />
+            android:label="Podsumowanie"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
