@@ -30,6 +30,8 @@
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaPredefiniowaneActivity"
             android:label="Zlecenia" />
+        <activity android:name=".View.Internal.Logistyk_UI.ZleceniaPodsumowanieActivity"
+            android:label="Podsumowanie"/>
         <activity android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity" />
         <activity android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity" />
         <activity android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity" />
