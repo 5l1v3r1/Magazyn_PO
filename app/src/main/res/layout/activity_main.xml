@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.liebertyesterday.shorti1996.magazyn.View.MainActivity">
+    tools:context="pl.koziel.liebert.magahurtomonitor.View.MainActivity">
 
     <Button
         android:id="@+id/logistyk_button"
