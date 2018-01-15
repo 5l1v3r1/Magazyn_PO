@@ -40,7 +40,7 @@ public class ZamowieniaListActivity extends AppCompatActivity {
     @BindView(R.id.zamowienia_rv)
     RecyclerView mZamowieniaRv;
     @BindView(R.id.zamowienia_list_wait_info)
-    TextView mWaitInfo;
+    View mWaitInfo;
     private ZamowieniaAdapter mZamowieniaAdapter;
     private NetworkCaller mCaller;
     private MagazynApi mService;
