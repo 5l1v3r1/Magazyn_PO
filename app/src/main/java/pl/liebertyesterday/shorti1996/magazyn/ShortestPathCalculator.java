@@ -1,6 +1,7 @@
 package pl.liebertyesterday.shorti1996.magazyn;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,7 +49,8 @@ public class ShortestPathCalculator {
                 });
     }
 
-    private void addStartAndEndLoc(@NonNull Lokalizacja currentLoc, @NonNull List<Lokalizacja> lokalizacje) {
+    @VisibleForTesting
+    void addStartAndEndLoc(@NonNull Lokalizacja currentLoc, @NonNull List<Lokalizacja> lokalizacje) {
         // Add start position
         lokalizacje.add(0, currentLoc);
         // Add end position

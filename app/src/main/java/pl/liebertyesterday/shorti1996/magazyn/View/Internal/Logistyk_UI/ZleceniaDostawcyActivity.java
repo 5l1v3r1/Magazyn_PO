@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,6 +44,7 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
     RecyclerView mDostawcyRv;
     @BindView(R.id.dostawcy_wait_info)
     TextView mWaitInfo;
+    private DostawcyAdapter mDostawcyAdapter;
 
 
     @Override
@@ -58,6 +62,32 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.zamowienia_dostawcy_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_dostawcy_sort:
+                sortDostawcy();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void sortDostawcy() {
+        if (mDostawcyAdapter.mDostawcy != null) {
+            Collections.sort(mDostawcyAdapter.mDostawcy,
+                    (d1, d2) -> d2.getIleZapotrzebowan() - d1.getIleZapotrzebowan());
+            List<Dostawca> toRemove = new ArrayList<>();
+            for (int i = 0; i < mDostawcyAdapter.mDostawcy.size(); i++) {
+                if (mDostawcyAdapter.mDostawcy.get(i).getIleZapotrzebowan() <= 0) {
+                    toRemove.add(mDostawcyAdapter.mDostawcy.get(i));
+                }
+            }
+            mDostawcyAdapter.mDostawcy.removeAll(toRemove);
+            mDostawcyAdapter.notifyDataSetChanged();
+        }
     }
 
     private void getDataFromApi() {
@@ -80,7 +110,8 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         hideWaitInfo();
         mDostawcyRv.setLayoutManager(new LinearLayoutManager(this));
-        mDostawcyRv.setAdapter(new DostawcyAdapter(mDostawcy));
+        mDostawcyAdapter = new DostawcyAdapter(mDostawcy);
+        mDostawcyRv.setAdapter(mDostawcyAdapter);
     }
 
     private void hideWaitInfo() {
@@ -88,7 +119,7 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
     }
 
     class DostawcyAdapter extends RecyclerView.Adapter<ZleceniaDostawcyActivity.DostawcyAdapter.DostawcaViewHolder> {
-        private List<Dostawca> mDostawcy;
+        List<Dostawca> mDostawcy;
 
         public DostawcyAdapter(List<Dostawca> dostawca) {
             mDostawcy = dostawca;

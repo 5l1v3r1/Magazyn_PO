@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn.Model;
+package pl.liebertyesterday.shorti1996.magazyn;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +9,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import pl.liebertyesterday.shorti1996.magazyn.AnnealingSimulator;
+import pl.liebertyesterday.shorti1996.magazyn.Model.Lokalizacja;
+import pl.liebertyesterday.shorti1996.magazyn.Model.TravelPath;
 
 import static org.junit.Assert.assertEquals;
 
