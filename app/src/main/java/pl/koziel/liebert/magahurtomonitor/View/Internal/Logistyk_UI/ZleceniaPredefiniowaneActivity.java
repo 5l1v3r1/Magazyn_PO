@@ -40,7 +40,7 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
     @BindView(R.id.predef_zlec_rv)
     RecyclerView mZleceniaRv;
     @BindView(R.id.predef_zlec_wait)
-    TextView mWaitInfo;
+    View mWaitInfo;
     @BindView(R.id.predef_zlec_anuluj)
     Button mAnulujBtn;
     @BindView(R.id.predef_zlec_gotowe)
