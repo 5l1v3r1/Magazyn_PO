@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -24,12 +25,20 @@ public class OrderTypeChoiceActivity extends AppCompatActivity {
     @BindView(R.id.zlec_dostawcy_btn)
     Button dostawcyBtn;
 
+    @BindView(R.id.gen_plan_dostaw_btn)
+    Button planDostawyBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_type_choice);
 
         ButterKnife.bind(this);
+
+        planDostawyBtn.setOnClickListener(view ->
+                Toast.makeText(OrderTypeChoiceActivity.this,
+                    "Funkcjonalność dostępna wkrótce",
+                    Toast.LENGTH_SHORT).show());
 
         dostawcyBtn.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), ZleceniaDostawcyActivity.class);
