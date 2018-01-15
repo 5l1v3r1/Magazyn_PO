@@ -4,23 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background1"
     tools:context="pl.koziel.liebert.magahurtomonitor.View.MainActivity">
 
     <Button
         android:id="@+id/logistyk_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Logistyk"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="200dp"
+        android:text="@string/logistyk"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/magazynier_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Magazynier"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:text="@string/magazynier"
         app:layout_constraintStart_toStartOf="@+id/logistyk_button"
         app:layout_constraintTop_toBottomOf="@+id/logistyk_button" />
 </android.support.constraint.ConstraintLayout>
