@@ -28,13 +28,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
-import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.Controller.Api.MagazynApi;
+import pl.liebertyesterday.shorti1996.magazyn.Controller.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.Controller.ShortestPathCalculator;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Lokalizacja;
 import pl.liebertyesterday.shorti1996.magazyn.Model.PozycjaZamowienia;
 import pl.liebertyesterday.shorti1996.magazyn.Model.ZamowienieDoKompletowania;
 import pl.liebertyesterday.shorti1996.magazyn.R;
-import pl.liebertyesterday.shorti1996.magazyn.ShortestPathCalculator;
 
 public class ZamowienieKompletujActivity extends AppCompatActivity
         implements ShortestPathCalculator.OnShortestPathFound {

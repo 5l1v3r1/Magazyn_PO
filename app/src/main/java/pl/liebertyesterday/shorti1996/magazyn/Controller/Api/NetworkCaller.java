@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn.Api;
+package pl.liebertyesterday.shorti1996.magazyn.Controller.Api;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 

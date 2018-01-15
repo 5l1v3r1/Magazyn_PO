@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn;
+package pl.liebertyesterday.shorti1996.magazyn.Controller;
 
 import java.util.ArrayList;
 import java.util.Collections;

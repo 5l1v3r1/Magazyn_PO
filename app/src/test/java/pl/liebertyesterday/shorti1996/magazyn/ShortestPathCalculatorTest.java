@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import pl.liebertyesterday.shorti1996.magazyn.Controller.ShortestPathCalculator;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Lokalizacja;
 
 import static org.junit.Assert.assertEquals;

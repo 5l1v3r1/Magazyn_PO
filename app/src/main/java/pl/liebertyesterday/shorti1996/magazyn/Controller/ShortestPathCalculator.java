@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn;
+package pl.liebertyesterday.shorti1996.magazyn.Controller;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;

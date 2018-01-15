@@ -25,8 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import pl.liebertyesterday.shorti1996.magazyn.Api.MagazynApi;
-import pl.liebertyesterday.shorti1996.magazyn.Api.NetworkCaller;
+import pl.liebertyesterday.shorti1996.magazyn.Controller.Api.MagazynApi;
+import pl.liebertyesterday.shorti1996.magazyn.Controller.Api.NetworkCaller;
 import pl.liebertyesterday.shorti1996.magazyn.Model.Dostawca;
 import pl.liebertyesterday.shorti1996.magazyn.R;
 

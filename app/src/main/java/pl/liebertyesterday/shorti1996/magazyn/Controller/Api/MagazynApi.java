@@ -1,4 +1,4 @@
-package pl.liebertyesterday.shorti1996.magazyn.Api;
+package pl.liebertyesterday.shorti1996.magazyn.Controller.Api;
 
 import java.util.List;
 
