@@ -54,6 +54,7 @@ public class ZleceniaPodsumowanieActivity extends AppCompatActivity {
             @Override
             public void onBindViewHolder(PotrzebnyTowarViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
+                holder.mCzyZam.setWidth(0);
                 holder.mCzyZam.setVisibility(View.INVISIBLE);
                 holder.mCzyZam.setOnCheckedChangeListener(null);
             }
