@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Magazyn</string>
-    <string name="nie_wyslano_dostawy_toast">Nie udało się wysłać dostawy na serwer...</string>
+    <string name="app_name">MHMonitor</string>
+    <string name="nie_wyslano_dostawy_toast">Nie udało się wysłać dostawy na serwer…</string>
     <string name="dostawa_wyslana_toast">Dostawa utworzona!</string>
+    <string name="logistyk">Logistyk</string>
+    <string name="magazynier">Magazynier</string>
 </resources>
