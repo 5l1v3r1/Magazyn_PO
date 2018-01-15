@@ -14,19 +14,23 @@ import pl.koziel.liebert.magahurtomonitor.Model.TravelPath;
 /**
  * Klasa implementująca algorytm zainspirowany procesem wyrzażania w metalurgii.
  * Rozwiązuje problem komiwojażera-
- * w tym przypadku zebrania wszystkich potrzebnych towarów pokonując jak najkrótszą drogę
+ * w tym przypadku zebrania wszystkich potrzebnych towarów pokonując jak najkrótszą drogę.
+ * Źródło: http://www.baeldung.com/java-simulated-annealing-for-traveling-salesman
  */
 public class AnnealingSimulator {
 
     TravelPath travelPath;
 
+    /**
+     *
+     * @param travelPath Nieuporządkowana ścieżka zawierająca lokalizacje, które muszą zostać odwiedzone.
+     */
     public AnnealingSimulator(TravelPath travelPath) {
         this.travelPath = travelPath;
     }
 
     /**
      * Przeprowadzenie symulacji mającej na celu wyznaczenie najkrótszej ścieżki
-     * Source: http://www.baeldung.com/java-simulated-annealing-for-traveling-salesman
      * @param startingTemperature energia systemu w momencie początkowym
      * @param coolingRate procent spadku temperatury w każdym kroku
      * @return Lista lokalizacji uporządkowana w optymalny sposób
