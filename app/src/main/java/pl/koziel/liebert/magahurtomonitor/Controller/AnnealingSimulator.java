@@ -14,7 +14,7 @@ import pl.koziel.liebert.magahurtomonitor.Model.TravelPath;
 /**
  * Klasa implementująca algorytm zainspirowany procesem wyrzażania w metalurgii.
  * Rozwiązuje problem komiwojażera-
- * zebrania wszystkich potrzebnych towarów pokonując jak najkrótszą drogę
+ * w tym przypadku zebrania wszystkich potrzebnych towarów pokonując jak najkrótszą drogę
  */
 public class AnnealingSimulator {
 
