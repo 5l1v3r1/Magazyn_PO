@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -74,6 +75,11 @@ public class ZleceniaPredefiniowaneActivity extends AppCompatActivity {
                 zlecenie.setNrDostawcy(mDostawca.getNrDostawcy());
                 zlecenia.add(zlecenie);
             }
+        }
+
+        if (doZamowienia.isEmpty()) {
+            Toast.makeText(this, "Nie można złożyć pustego zamówienia", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         String zleceniaArr = new Gson().toJson(zlecenia);

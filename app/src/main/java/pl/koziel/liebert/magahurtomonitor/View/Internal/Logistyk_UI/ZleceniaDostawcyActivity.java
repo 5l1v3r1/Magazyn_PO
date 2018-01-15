@@ -76,7 +76,9 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
     }
 
     private void sortDostawcy() {
-        if (mDostawcyAdapter.mDostawcy != null) {
+        if (mDostawcyAdapter!= null
+                && mDostawcyAdapter.mDostawcy != null
+                && !mDostawcyAdapter.mDostawcy.isEmpty()) {
             Collections.sort(mDostawcyAdapter.mDostawcy,
                     (d1, d2) -> d2.getIleZapotrzebowan() - d1.getIleZapotrzebowan());
             List<Dostawca> toRemove = new ArrayList<>();
