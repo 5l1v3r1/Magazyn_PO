@@ -4,25 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background1"
     tools:context=".View.Internal.Logistyk_UI.OrderTypeChoiceActivity">
 
     <Button
-        android:id="@+id/gen_plan_dostaw_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Generuj plan dostaw"
+        android:id="@+id/zlec_dostawcy_btn"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="200dp"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:text="@string/wy_wietl_dostawc_w"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/zlec_dostawcy_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wyświetl dostawców"
-        app:layout_constraintStart_toStartOf="@+id/gen_plan_dostaw_btn"
-        app:layout_constraintTop_toBottomOf="@+id/gen_plan_dostaw_btn" />
+        android:id="@+id/gen_plan_dostaw_btn"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:text="@string/generuj_plan_dostaw"
+        app:layout_constraintStart_toStartOf="@+id/zlec_dostawcy_btn"
+        app:layout_constraintTop_toBottomOf="@+id/zlec_dostawcy_btn" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
