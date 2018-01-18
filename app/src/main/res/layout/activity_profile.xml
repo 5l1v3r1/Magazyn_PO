@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.koziel.liebert.magahurtomonitor.View.Internal.ProfileActivity">
+
+    <ImageView
+        android:id="@+id/profil_avatar"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.056"
+        app:srcCompat="@drawable/icon6" />
+
+    <TextView
+        android:id="@+id/profil_nazwa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="@+id/profil_avatar"
+        app:layout_constraintStart_toStartOf="@+id/profil_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/profil_avatar" />
+
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/profil_avatar"
+        app:layout_constraintStart_toStartOf="@+id/profil_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/profil_nazwa">
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -52,6 +53,11 @@ public class ZamowieniaListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_zamowienia_list);
 
         ButterKnife.bind(this);
+
+        Button buttonDebug = findViewById(R.id.button_tst);
+        buttonDebug.setVisibility(View.GONE);
+        buttonDebug.setOnClickListener(view ->
+                startActivity(new Intent(ZamowieniaListActivity.this, ProfilMagazynierActivity.class)));
 
         getDataFromApi();
     }

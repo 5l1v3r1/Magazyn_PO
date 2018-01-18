@@ -41,7 +41,7 @@ public class OrderTypeChoiceActivity extends AppCompatActivity {
 
         planDostawyBtn.setOnClickListener(view ->
                 Toast.makeText(OrderTypeChoiceActivity.this,
-                    "Funkcjonalność dostępna wkrótce",
+                    R.string.dostepne_w_krotce,
                     Toast.LENGTH_SHORT).show());
 
         dostawcyBtn.setOnClickListener(view -> {

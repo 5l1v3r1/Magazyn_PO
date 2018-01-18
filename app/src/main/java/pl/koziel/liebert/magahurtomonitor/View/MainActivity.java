@@ -9,7 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.koziel.liebert.magahurtomonitor.R;
 import pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI.OrderTypeChoiceActivity;
-import pl.koziel.liebert.magahurtomonitor.View.Internal.Magazynier_UI.ZamowieniaListActivity;
+import pl.koziel.liebert.magahurtomonitor.View.Internal.Magazynier_UI.ProfilMagazynierActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mMagazynierBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ZamowieniaListActivity.class);
+            Intent intent = new Intent(this, ProfilMagazynierActivity.class);
             startActivity(intent);
         });
     }
