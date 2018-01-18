@@ -15,6 +15,8 @@ public class PotrzebnyTowar extends Towar {
     @SerializedName("IDZapotrzebowania")
     @Expose
     private int idZapotrzebowania;
+    @SerializedName("IloscBrak")
+    private Integer iloscBrak;
     private boolean czyZamowic;
 
     public PotrzebnyTowar(){}
@@ -50,5 +52,13 @@ public class PotrzebnyTowar extends Towar {
 
     public void setCzyZamowic(boolean czyZamowic) {
         this.czyZamowic = czyZamowic;
+    }
+
+    public Integer getIloscBrak() {
+        return iloscBrak;
+    }
+
+    public void setIloscBrak(Integer iloscBrak) {
+        this.iloscBrak = iloscBrak;
     }
 }
