@@ -47,8 +47,10 @@
         <activity
             android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".View.Internal.Magazynier_UI.ProfilMagazynierActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".View.Internal.Magazynier_UI.ProfileMagazynierActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".View.Internal.Logistyk_UI.ProfileLogistykActivity"></activity>
     </application>
 
 </manifest>

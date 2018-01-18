@@ -8,8 +8,8 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.koziel.liebert.magahurtomonitor.R;
-import pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI.OrderTypeChoiceActivity;
-import pl.koziel.liebert.magahurtomonitor.View.Internal.Magazynier_UI.ProfilMagazynierActivity;
+import pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI.ProfileLogistykActivity;
+import pl.koziel.liebert.magahurtomonitor.View.Internal.Magazynier_UI.ProfileMagazynierActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         mLogistykBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, OrderTypeChoiceActivity.class);
+            Intent intent = new Intent(this, ProfileLogistykActivity.class);
             startActivity(intent);
         });
 
         mMagazynierBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ProfilMagazynierActivity.class);
+            Intent intent = new Intent(this, ProfileMagazynierActivity.class);
             startActivity(intent);
         });
     }

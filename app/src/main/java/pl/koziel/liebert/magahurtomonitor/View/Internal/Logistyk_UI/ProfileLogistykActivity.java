@@ -1,20 +1,19 @@
-package pl.koziel.liebert.magahurtomonitor.View.Internal.Magazynier_UI;
+package pl.koziel.liebert.magahurtomonitor.View.Internal.Logistyk_UI;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import pl.koziel.liebert.magahurtomonitor.R;
 import pl.koziel.liebert.magahurtomonitor.View.Internal.ProfileActivity;
 
-public class ProfilMagazynierActivity extends ProfileActivity {
+public class ProfileLogistykActivity extends ProfileActivity {
 
     private static final String[] buttonLabels = {
-            "Skompletuj zamówienie",
-            "Lista zamówień",
+            "Stwórz zamówienie",
+            "Przetwórz zapotrzebowania",
+            "Stwórz zlecenie",
             "Dane pracownika",
             "Wyloguj",
     };
@@ -23,7 +22,7 @@ public class ProfilMagazynierActivity extends ProfileActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mNazwa.setText("Magazynier00001");
+        mNazwa.setText("Logistyk00001");
     }
 
     @Override
@@ -37,12 +36,13 @@ public class ProfilMagazynierActivity extends ProfileActivity {
             newButton.setText(buttonLabels[i]);
             row.addView(newButton);
 
-            if (i == 0) {
+            if (i == 1) {
                 newButton.setOnClickListener(view ->
-                        startActivity(new Intent(ProfilMagazynierActivity.this, ZamowieniaListActivity.class)));
+                        startActivity(new Intent(ProfileLogistykActivity.this, OrderTypeChoiceActivity.class)));
             } else {
-                newButton.setOnClickListener(view ->
-                        Toast.makeText(this, R.string.dostepne_w_krotce, Toast.LENGTH_SHORT).show());
+                newButton.setEnabled(false);
+//                newButton.setOnClickListener(view ->
+//                        Toast.makeText(this, R.string.dostepne_w_krotce, Toast.LENGTH_SHORT).show());
             }
 
             viewGroup.addView(row);

@@ -57,7 +57,7 @@ public class ZamowieniaListActivity extends AppCompatActivity {
         Button buttonDebug = findViewById(R.id.button_tst);
         buttonDebug.setVisibility(View.GONE);
         buttonDebug.setOnClickListener(view ->
-                startActivity(new Intent(ZamowieniaListActivity.this, ProfilMagazynierActivity.class)));
+                startActivity(new Intent(ZamowieniaListActivity.this, ProfileMagazynierActivity.class)));
 
         getDataFromApi();
     }
