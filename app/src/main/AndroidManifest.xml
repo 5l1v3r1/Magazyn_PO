@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="pl.koziel.liebert.magahurtomonitor">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -50,7 +51,13 @@
         <activity
             android:name=".View.Internal.Magazynier_UI.ProfileMagazynierActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".View.Internal.Logistyk_UI.ProfileLogistykActivity"></activity>
+        <activity android:name=".View.Internal.Logistyk_UI.ProfileLogistykActivity"/>
+        <!--It's a fix for TedPermissions lib-->
+        <activity android:name="com.gun0912.tedpermission.TedPermissionActivity"
+            android:configChanges="mcc|mnc|locale|keyboard|keyboardHidden|screenLayout|fontScale|uiMode|orientation|screenSize|layoutDirection"
+            android:screenOrientation="unspecified"
+            android:theme="@style/Theme.Transparent.Permission"
+            tools:replace="android:screenOrientation"/>
     </application>
 
 </manifest>
