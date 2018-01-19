@@ -22,6 +22,7 @@ allprojects {
         google()
         jcenter()
     }
+    apply from: "https://raw.githubusercontent.com/gradle-fury/gradle-fury/master/gradle/quality.gradle"
 }
 
 task clean(type: Delete) {
