@@ -40,9 +40,9 @@ public class PredefZlecAdapter extends RecyclerView.Adapter<PredefZlecAdapter.Po
     public void onBindViewHolder(PotrzebnyTowarViewHolder holder, int position) {
         final PotrzebnyTowar potrzebnyTowar = mPotrzebneTowary.get(position);
         holder.mNazwa.setText(String.valueOf(potrzebnyTowar.getNazwa()));
-        String ileText = String.valueOf(potrzebnyTowar.getDoZamowienia())
-                + "/"
-                + String.valueOf(potrzebnyTowar.getIloscBrak());
+        String ileText = String.format("%s/%s",
+                String.valueOf(potrzebnyTowar.getDoZamowienia()),
+                String.valueOf(potrzebnyTowar.getIloscBrak()));
         holder.mIle.setText(ileText);
     }
 
