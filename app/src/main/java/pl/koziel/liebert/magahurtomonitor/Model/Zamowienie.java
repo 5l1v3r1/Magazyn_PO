@@ -7,6 +7,9 @@ package pl.koziel.liebert.magahurtomonitor.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Rezerwacja na pewne towary.
+ */
 public class Zamowienie {
 
     @SerializedName("AdresID")

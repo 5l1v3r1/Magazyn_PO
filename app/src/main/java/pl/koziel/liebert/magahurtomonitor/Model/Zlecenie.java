@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by wojciech.liebert on 01.01.2018.
  */
 
+/**
+ * Zlecenie zakupu towaru zgodne z jego zapotrzebowaniem ({@link Zapotrzebowanie}).
+ */
 public class Zlecenie {
 
     @SerializedName("IloscZlec")

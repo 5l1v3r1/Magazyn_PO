@@ -9,6 +9,9 @@ import java.util.List;
  * Created by wojciech.liebert on 01.01.2018.
  */
 
+/**
+ * Użytkownik systemu zaopatrujący magazyn w jeden lub wiecej towarów
+ */
 public class Dostawca {
 
     @SerializedName("IleZapotrzebowan")

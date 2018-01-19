@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by wojciech.liebert on 01.01.2018.
  */
 
+/**
+ * Róznica między stanem magazynowym, a zadeklarowaną wartością maksymalną dla danego towaru.
+ */
 public class Zapotrzebowanie {
 
     @SerializedName("DataZap")

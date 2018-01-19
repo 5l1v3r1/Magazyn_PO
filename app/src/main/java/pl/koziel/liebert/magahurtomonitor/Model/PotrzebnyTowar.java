@@ -7,6 +7,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by wojciech.liebert on 06.01.2018.
  */
 
+/**
+ * Zachowuje wszystkie właściwości {@link Towar},
+ * ale przechowuje informacje zwiazane z zapotrzebowaniem i zamówieniem.
+ */
 public class PotrzebnyTowar extends Towar {
 
     @SerializedName("DoZamowienia")

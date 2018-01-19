@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 /**
- * Uporządkowana ścieżka łącząca lokalizacje
+ * Uporządkowana ścieżka łącząca lokalizacje ({@link Lokalizacja}).
  */
 public class TravelPath {
 

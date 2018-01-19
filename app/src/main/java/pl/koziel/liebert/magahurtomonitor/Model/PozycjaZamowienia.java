@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by wojciech.liebert on 12.01.2018.
  */
 
+/**
+ * Towar zamówiony w jednym zamówieniu przez klienta wraz z jego ilością.
+ */
 public class PozycjaZamowienia implements Comparable<PozycjaZamowienia> {
 
     @SerializedName("IDPozycjiZamowienia")

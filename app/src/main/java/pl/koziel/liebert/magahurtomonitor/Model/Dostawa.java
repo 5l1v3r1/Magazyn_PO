@@ -9,6 +9,9 @@ import java.util.List;
  * Created by wojciech.liebert on 01.01.2018.
  */
 
+/**
+ * Dostarczenie zleceń zakupu towarów przez jednego dostawcę.
+ */
 public class Dostawa {
 
     @SerializedName("DostawcaNrDostawcy")

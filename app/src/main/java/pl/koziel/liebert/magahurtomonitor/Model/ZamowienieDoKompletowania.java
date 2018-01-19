@@ -9,6 +9,9 @@ import java.util.List;
  * Created by wojciech.liebert on 12.01.2018.
  */
 
+/**
+ * {@link Zamowienie} uzupełnione o pozycje zaówienia.
+ */
 public class ZamowienieDoKompletowania extends Zamowienie {
     @SerializedName("pozycjeZamowienia")
     @Expose

@@ -11,6 +11,9 @@ import static pl.koziel.liebert.magahurtomonitor.Model.WeAreAgile.KARA_ZA_ZMIANE
 import static pl.koziel.liebert.magahurtomonitor.Model.WeAreAgile.KARA_ZA_ZMIANE_RZADKU_W_REGALE;
 import static pl.koziel.liebert.magahurtomonitor.Model.WeAreAgile.WYSOKOSC_REGALU;
 
+/**
+ * Miejsce w magazynie określone jako para danych: numer regału i numer półki.
+ */
 public class Lokalizacja {
 
     @SerializedName("IDLokalizacji")
