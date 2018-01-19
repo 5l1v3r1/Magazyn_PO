@@ -74,7 +74,7 @@ public class TravelPathTest {
     }
 
     @Test
-    public void test() {
+    public void travelPathLengthTest() {
         double distance = new AnnealingSimulator(new TravelPath(mLokalizacje))
                 .simulateAnnealingForDistance(100, 0.99999);
         assertEquals(new TravelPath(mExpectedLokalizacje).getDistance(), distance, DELTA);

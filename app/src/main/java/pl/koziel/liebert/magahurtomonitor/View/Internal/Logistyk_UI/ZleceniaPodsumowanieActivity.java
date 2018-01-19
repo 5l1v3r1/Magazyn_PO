@@ -86,7 +86,7 @@ public class ZleceniaPodsumowanieActivity extends AppCompatActivity {
     }
 
     /**
-     * Pobiera dane przekazane z poprzedniej aktywności
+     * Pobiera dane przekazane z poprzedniej aktywności {@link ZleceniaPredefiniowaneActivity}
      */
     private void parseExtras() {
         String extraZlecenia = getIntent().getStringExtra(ZleceniaPredefiniowaneActivity.EXTRA_ZLECENIA);

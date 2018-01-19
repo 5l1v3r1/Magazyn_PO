@@ -45,7 +45,7 @@ public class ZleceniaPredefiniowaneActivityTest {
     }
 
     @Test
-    public void testest() {
+    public void tworzenieZlecenZPotrzebnychTowarow() {
         ZleceniaPredefiniowaneActivity.PotrzebneTowaryOrazZleceniaHelper towaryZleceniaHelper
                 = new ZleceniaPredefiniowaneActivity
                         .PotrzebneTowaryOrazZleceniaHelper(mPotrzebneTowary, mDostawcaId).invoke();
