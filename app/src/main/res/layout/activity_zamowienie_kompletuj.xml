@@ -13,6 +13,89 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorAccent">
+
+            <TextView
+                android:id="@+id/towar_nazwa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Nazwa"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Nazwa" />
+
+            <TextView
+                android:id="@+id/nr_regalu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Regał"
+                android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                app:layout_constraintBottom_toBottomOf="@+id/towar_nazwa"
+                app:layout_constraintEnd_toStartOf="@+id/nr_polki"
+                app:layout_constraintTop_toTopOf="@+id/towar_nazwa"
+                tools:text="Regał" />
+
+            <TextView
+                android:id="@+id/nr_polki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="start"
+                android:text="Półka"
+                android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                app:layout_constraintBottom_toBottomOf="@+id/towar_nazwa"
+                app:layout_constraintEnd_toStartOf="@+id/l_sztuk"
+                app:layout_constraintTop_toTopOf="@+id/towar_nazwa"
+                tools:text="Półka" />
+
+            <TextView
+                android:id="@+id/l_sztuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Ilość"
+                android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                app:layout_constraintBottom_toBottomOf="@+id/towar_nazwa"
+                app:layout_constraintEnd_toStartOf="@+id/skan_cb"
+                app:layout_constraintTop_toTopOf="@+id/towar_nazwa"
+                tools:text="Ilość" />
+
+            <TextView
+                android:id="@+id/skan_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Skan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+                app:layout_constraintBottom_toBottomOf="@+id/towar_nazwa"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/towar_nazwa"
+                tools:text="Skan" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/zamowienie_kompletuj_rv"
         android:layout_width="0dp"
@@ -24,8 +107,8 @@
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/zamowienie_kompletuj_wait_info"
