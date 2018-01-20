@@ -239,6 +239,10 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
         final PozycjaZamowienia pozycjaZamowienia = findPozycjaZamowienia(res);
         if (pozycjaZamowienia != null) {
             pozycjaZamowienia.setCzySkan(true);
+            String msg = String.format("Dodano towar o id %d", res);
+            Toast.makeText(this,
+                    msg,
+                    Toast.LENGTH_SHORT).show();
             mZamowieniaAdapter.notifyDataSetChanged();
             checkIfCompleted();
         } else {
