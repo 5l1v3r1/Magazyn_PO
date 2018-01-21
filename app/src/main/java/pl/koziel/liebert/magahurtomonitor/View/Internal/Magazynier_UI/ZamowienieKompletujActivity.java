@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +53,7 @@ public class ZamowienieKompletujActivity extends AppCompatActivity
     RecyclerView mKompletujRv;
 
     @BindView(R.id.zamowienie_kompletuj_wait_info)
-    TextView mWaitInfo;
+    ImageView mWaitInfo;
 
     @BindView(R.id.wpisz_btn)
     Button mWpiszBtn;

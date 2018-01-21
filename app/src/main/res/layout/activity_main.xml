@@ -4,30 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
+    android:background="@drawable/gradient"
     tools:context="pl.koziel.liebert.magahurtomonitor.View.MainActivity">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/icon7"
+        android:contentDescription="@string/icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/magahurtomonitor"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
 
     <Button
         android:id="@+id/logistyk_button"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="308dp"
+        android:background="@drawable/button_white"
         android:text="@string/logistyk"
-        android:textColor="@color/white"
-        android:background="@color/colorAccent"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/magazynier_button"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="0dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/white"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_white"
         android:text="@string/magazynier"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="@+id/logistyk_button"
         app:layout_constraintTop_toBottomOf="@+id/logistyk_button" />
 </android.support.constraint.ConstraintLayout>

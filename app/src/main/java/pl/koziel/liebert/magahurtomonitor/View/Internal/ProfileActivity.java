@@ -31,7 +31,7 @@ public abstract class ProfileActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        mAvatar.setImageResource(R.drawable.ic_person_black_24dp);
+        mAvatar.setImageResource(R.drawable.icon8);
 
         createButtons(mButtonsLl);
     }
