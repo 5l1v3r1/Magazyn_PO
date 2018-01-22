@@ -17,7 +17,7 @@
             android:name=".View.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:label=" ">
+            android:label="MHMonitor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,14 +46,17 @@
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity"
+            android:label="Zamówienia"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity"
+            android:label="Kompletowanie"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity"
+            android:label="Zeskanuj kod QR"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
         <activity
