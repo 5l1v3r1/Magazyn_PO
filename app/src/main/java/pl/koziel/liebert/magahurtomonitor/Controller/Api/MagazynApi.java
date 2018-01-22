@@ -7,7 +7,6 @@ import okhttp3.ResponseBody;
 import pl.koziel.liebert.magahurtomonitor.Model.Dostawca;
 import pl.koziel.liebert.magahurtomonitor.Model.Zamowienie;
 import pl.koziel.liebert.magahurtomonitor.Model.ZamowienieDoKompletowania;
-import pl.koziel.liebert.magahurtomonitor.Model.Zapotrzebowanie;
 import pl.koziel.liebert.magahurtomonitor.Model.Zlecenie;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -24,19 +23,33 @@ import retrofit2.http.Path;
 public interface MagazynApi {
     String SERVICE_ENDPOINT = "http://shorti1996.pythonanywhere.com/";
 
-    @GET("zapotrzebowanie")
-    Observable<List<Zapotrzebowanie>> getZapotrzebowanie();
-
+    /**
+     *
+     * @return Lista dostawcow
+     */
     @GET("dostawcy")
     Observable<List<Dostawca>> getDostawcy();
 
+    /**
+     *
+     * @return Lista zamowien
+     */
     @GET("zamowienia")
     Observable<List<Zamowienie>> getZamowienia();
 
-
+    /**
+     *
+     * @param nrZamowienia nr wybranego zamowienia
+     * @return Szczegoly zamowienia
+     */
     @GET("zamowienia/{NrZamowienia}")
     Observable<ZamowienieDoKompletowania> getZamowienieDoKompletowania(@Path("NrZamowienia") int nrZamowienia);
 
+    /**
+     * Tworzy dostawe na podane zlecenia
+     * @param zlecenia Lista zlecen, ktore skladaja sie na dostawe
+     * @return
+     */
     @PUT("utworz_dostawe")
     Observable<ResponseBody> putUtworzDostawe(@Body List<Zlecenie> zlecenia);
 }
