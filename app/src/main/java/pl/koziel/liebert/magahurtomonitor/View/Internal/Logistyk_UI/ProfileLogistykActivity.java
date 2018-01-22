@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import pl.koziel.liebert.magahurtomonitor.R;
 import pl.koziel.liebert.magahurtomonitor.View.Internal.ProfileActivity;
@@ -46,9 +47,10 @@ public class ProfileLogistykActivity extends ProfileActivity {
                 newButton.setOnClickListener(view ->
                         startActivity(new Intent(ProfileLogistykActivity.this, OrderTypeChoiceActivity.class)));
             } else {
-                newButton.setEnabled(false);
-//                newButton.setOnClickListener(view ->
-//                        Toast.makeText(this, R.string.dostepne_w_krotce, Toast.LENGTH_SHORT).show());
+//                newButton.setEnabled(false);
+                newButton.setBackgroundResource(R.drawable.button_gray_size);
+                newButton.setOnClickListener(view ->
+                        Toast.makeText(this, R.string.dostepne_w_krotce, Toast.LENGTH_SHORT).show());
             }
 
             viewGroup.addView(row);

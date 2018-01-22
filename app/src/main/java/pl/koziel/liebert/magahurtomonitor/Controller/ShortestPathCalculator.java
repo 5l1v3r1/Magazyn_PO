@@ -64,6 +64,11 @@ public class ShortestPathCalculator {
                 });
     }
 
+    /**
+     * Dodaje podaną lokalizację na początek ścieżki i wyjście z magazynu na jej koniec.
+     * @param currentLoc Lokalizacja startowa
+     * @param lokalizacje Istniejąca ścieżka wyrażona uporządkowanymi lokalizacjami
+     */
     @VisibleForTesting
     public void addStartAndEndLoc(@NonNull Lokalizacja currentLoc, @NonNull List<Lokalizacja> lokalizacje) {
         // Add start position
@@ -72,6 +77,10 @@ public class ShortestPathCalculator {
         lokalizacje.add(new Lokalizacja(8,1));
     }
 
+    /**
+     * Usuwa pierwszą i ostatnią lokalizację z listy lokalizacji.
+     * @param lokalizacje Istniejąca uporządkowana lista lokalizacji
+     */
     private void removeStartAndEndLoc(@NonNull List<Lokalizacja> lokalizacje) {
         lokalizacje.remove(0);
         lokalizacje.remove(lokalizacje.size() - 1);
