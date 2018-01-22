@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -46,7 +47,7 @@ public class ZleceniaDostawcyActivity extends AppCompatActivity {
     @BindView(R.id.dostawcy_rv)
     RecyclerView mDostawcyRv;
     @BindView(R.id.dostawcy_wait_info)
-    TextView mWaitInfo;
+    ImageView mWaitInfo;
     private DostawcyAdapter mDostawcyAdapter;
 
 

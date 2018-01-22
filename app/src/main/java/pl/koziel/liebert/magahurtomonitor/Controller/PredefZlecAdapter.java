@@ -56,7 +56,8 @@ public class PredefZlecAdapter extends RecyclerView.Adapter<PredefZlecAdapter.Po
 
         @BindView(R.id.predef_zlec_nazwa_tow)
         TextView mNazwa;
-        @BindView(R.id.predef_zlec_ilosc) TextView mIle;
+        @BindView(R.id.predef_zlec_ilosc)
+        TextView mIle;
         @BindView(R.id.predef_zlec_czy_zam)
         public CheckBox mCzyZam;
 

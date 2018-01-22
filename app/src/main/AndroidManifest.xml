@@ -16,7 +16,8 @@
         <activity
             android:name=".View.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="MHMonitor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,32 +27,45 @@
         <activity
             android:name=".View.Internal.Logistyk_UI.OrderTypeChoiceActivity"
             android:label="Generowanie zleceń"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaDostawcyActivity"
             android:label="Dostawcy"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaPredefiniowaneActivity"
             android:label="Zlecenia"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".View.Internal.Logistyk_UI.ZleceniaPodsumowanieActivity"
             android:label="Podsumowanie"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".View.Internal.Magazynier_UI.ZamowieniaListActivity"
-            android:screenOrientation="portrait" />
+            android:label="Zamówienia"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".View.Internal.Magazynier_UI.ZamowienieKompletujActivity"
-            android:screenOrientation="portrait" />
+            android:label="Kompletowanie"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".View.Internal.Magazynier_UI.SimpleScannerActivity"
-            android:screenOrientation="portrait" />
+            android:label="Zeskanuj kod QR"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".View.Internal.Magazynier_UI.ProfileMagazynierActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".View.Internal.Logistyk_UI.ProfileLogistykActivity"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".View.Internal.Logistyk_UI.ProfileLogistykActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <!--It's a fix for TedPermissions lib-->
         <activity android:name="com.gun0912.tedpermission.TedPermissionActivity"
             android:configChanges="mcc|mnc|locale|keyboard|keyboardHidden|screenLayout|fontScale|uiMode|orientation|screenSize|layoutDirection"
